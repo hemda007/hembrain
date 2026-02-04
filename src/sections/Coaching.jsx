@@ -1,260 +1,233 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { coachingPlans } from '../data';
+
+const plans = [
+  {
+    id: 'free',
+    name: 'Free Access',
+    price: '$0',
+    period: 'forever',
+    description: 'Explore the brain and access public content',
+    features: [
+      'Browse all knowledge domains',
+      'Access public mental models',
+      'Read top insights',
+      'Basic scenario frameworks'
+    ]
+  },
+  {
+    id: 'pro',
+    name: 'Pro Access',
+    price: '$29',
+    period: '/month',
+    description: 'Full access to AI coaching and deep dives',
+    features: [
+      'Everything in Free',
+      'AI chat with my brain',
+      'Full scenario deep dives',
+      'Weekly thought streams',
+      'Priority support'
+    ],
+    popular: true
+  }
+];
 
 const Coaching = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    goal: '',
-    selectedPlan: '',
-  });
+  const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.goal) {
+    if (email.trim()) {
       setIsSubmitted(true);
     }
   };
 
-  const handlePlanSelect = (planId) => {
-    setFormData((prev) => ({ ...prev, selectedPlan: planId }));
-  };
-
   return (
-    <section id="coaching" className="section relative">
-      <div className="absolute inset-0 neural-bg" />
-      <div className="absolute inset-0 grid-bg opacity-30" />
+    <section id="coaching" className="section">
+      <div className="container">
+        {/* Header */}
+        <div className="section-header">
+          <motion.span
+            className="section-label"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Coaching
+          </motion.span>
+          <motion.h2
+            className="heading-lg section-title"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Get personalized guidance
+          </motion.h2>
+          <motion.p
+            className="section-description"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            Access deeper insights and AI-powered coaching based on my frameworks.
+          </motion.p>
+        </div>
 
-      <div className="container relative z-10">
-        {/* Section header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="section-label">Personal Growth</span>
-          <h2 className="section-title">
-            <span style={{ color: 'white' }}>Add Me As Your </span>
-            <span className="text-gradient-purple">Coach</span>
-          </h2>
-          <p className="section-description" style={{ margin: '0 auto' }}>
-            Get personalized guidance based on mental models that actually work.
-            From daily AI check-ins to live sessions.
-          </p>
-        </motion.div>
-
-        {/* Pricing cards */}
-        <div className="grid-2-cols" style={{ marginBottom: '80px' }}>
-          {coachingPlans.map((plan, index) => (
+        {/* Plans */}
+        <div className="grid-2" style={{ maxWidth: '800px', margin: '0 auto 80px' }}>
+          {plans.map((plan, index) => (
             <motion.div
               key={plan.id}
-              className="relative p-8 rounded-2xl cursor-pointer transition-all"
-              style={{
-                background: 'rgba(18, 18, 42, 0.6)',
-                backdropFilter: 'blur(20px)',
-                border: `1px solid ${formData.selectedPlan === plan.id ? plan.color : 'rgba(255,255,255,0.08)'}`,
-                boxShadow: formData.selectedPlan === plan.id ? `0 0 40px ${plan.color}20` : 'none',
-              }}
+              className="card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              whileHover={{
-                y: -8,
-                borderColor: plan.color,
-                boxShadow: `0 30px 60px ${plan.color}20`,
+              transition={{ delay: index * 0.1 }}
+              style={{
+                border: plan.popular ? '1px solid var(--accent-purple)' : '1px solid var(--border-subtle)',
+                position: 'relative'
               }}
-              onClick={() => handlePlanSelect(plan.id)}
             >
-              {/* Highlighted badge */}
-              {plan.highlighted && (
-                <motion.div
-                  className="absolute -top-4 left-1/2 px-5 py-1.5 rounded-full text-xs font-bold text-white"
-                  style={{
-                    transform: 'translateX(-50%)',
-                    background: `linear-gradient(135deg, ${plan.color}, #FF6B9D)`,
-                    boxShadow: `0 4px 15px ${plan.color}40`,
-                  }}
-                  initial={{ scale: 0, y: 10 }}
-                  animate={{ scale: 1, y: 0 }}
-                  transition={{ delay: 0.5, type: 'spring' }}
-                >
-                  RECOMMENDED
-                </motion.div>
+              {plan.popular && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-12px',
+                  left: '24px',
+                  padding: '4px 12px',
+                  fontSize: '0.75rem',
+                  fontWeight: '600',
+                  background: 'var(--accent-purple)',
+                  color: 'white',
+                  borderRadius: '100px'
+                }}>
+                  Popular
+                </span>
               )}
 
-              {/* Plan icon */}
-              <motion.div
-                className="w-16 h-16 rounded-2xl mb-6 flex items-center justify-center"
-                style={{
-                  background: `linear-gradient(135deg, ${plan.color}30, ${plan.color}10)`,
-                  border: `1px solid ${plan.color}50`,
-                }}
-                whileHover={{
-                  boxShadow: `0 0 30px ${plan.color}40`,
-                }}
-              >
-                <span className="text-3xl">
-                  {plan.id === 'ai-coaching' ? '🤖' : '🎯'}
-                </span>
-              </motion.div>
+              <h3 style={{
+                fontSize: '1.125rem',
+                fontWeight: '600',
+                marginBottom: '8px'
+              }}>
+                {plan.name}
+              </h3>
 
-              {/* Plan details */}
-              <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
-              <p
-                className="text-3xl font-bold mb-4"
-                style={{ color: plan.color }}
-              >
-                {plan.price}
+              <div style={{ marginBottom: '16px' }}>
+                <span style={{ fontSize: '2rem', fontWeight: '700' }}>{plan.price}</span>
+                <span style={{ color: 'var(--text-tertiary)', marginLeft: '4px' }}>{plan.period}</span>
+              </div>
+
+              <p style={{
+                fontSize: '0.875rem',
+                color: 'var(--text-secondary)',
+                marginBottom: '24px'
+              }}>
+                {plan.description}
               </p>
-              <p className="text-gray-400 text-sm mb-8 leading-relaxed">{plan.description}</p>
 
-              {/* Features list */}
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, i) => (
-                  <motion.li
-                    key={i}
-                    className="flex items-start gap-3 text-sm text-gray-300"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.1 }}
+              <ul style={{ listStyle: 'none', marginBottom: '24px' }}>
+                {plan.features.map((feature) => (
+                  <li
+                    key={feature}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      fontSize: '0.875rem',
+                      color: 'var(--text-secondary)',
+                      marginBottom: '10px'
+                    }}
                   >
-                    <svg
-                      className="w-5 h-5 flex-shrink-0 mt-0.5"
-                      style={{ color: plan.color }}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
+                    <svg width="16" height="16" fill="none" stroke="var(--accent-green)" strokeWidth="2">
+                      <path d="M4 8l3 3 5-6" />
                     </svg>
                     {feature}
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
 
-              {/* Select indicator */}
-              <div
-                className="w-6 h-6 rounded-full border-2 absolute top-6 right-6 flex items-center justify-center"
-                style={{ borderColor: plan.color }}
+              <button
+                className={`btn w-full ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
+                style={{ marginTop: 'auto' }}
               >
-                {formData.selectedPlan === plan.id && (
-                  <motion.div
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: plan.color }}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: 'spring' }}
-                  />
-                )}
-              </div>
+                {plan.popular ? 'Get Started' : 'Start Free'}
+              </button>
             </motion.div>
           ))}
         </div>
 
-        {/* Signup form */}
+        {/* Waitlist */}
         <motion.div
-          className="max-w-lg mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          style={{
+            maxWidth: '480px',
+            margin: '0 auto',
+            textAlign: 'center'
+          }}
         >
           {!isSubmitted ? (
-            <div
-              className="p-8 rounded-2xl"
-              style={{
-                background: 'rgba(18, 18, 42, 0.6)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-              }}
-            >
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">Join the Waitlist</h3>
-                  <p className="text-gray-400 text-sm">Be the first to know when coaching launches.</p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="input-premium"
-                    required
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="input-premium"
-                    required
-                  />
-                </div>
-
-                <textarea
-                  placeholder="What's your main goal? What challenge are you facing?"
-                  value={formData.goal}
-                  onChange={(e) => setFormData({ ...formData, goal: e.target.value })}
-                  className="input-premium h-28 resize-none"
-                  required
+            <>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                marginBottom: '8px'
+              }}>
+                Join the waitlist
+              </h3>
+              <p style={{
+                fontSize: '0.875rem',
+                color: 'var(--text-secondary)',
+                marginBottom: '24px'
+              }}>
+                Get early access when AI coaching launches.
+              </p>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '12px' }}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="input"
+                  style={{ flex: 1 }}
                 />
-
                 <motion.button
                   type="submit"
-                  className="w-full py-4 rounded-xl font-semibold text-white"
-                  style={{
-                    background: 'linear-gradient(135deg, #8B5CF6 0%, #00D4FF 100%)',
-                  }}
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)',
-                  }}
+                  className="btn btn-primary"
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Join Waitlist
+                  Join
                 </motion.button>
               </form>
-            </div>
+            </>
           ) : (
             <motion.div
-              className="text-center py-12 rounded-2xl"
-              style={{
-                background: 'rgba(18, 18, 42, 0.6)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-              }}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
             >
-              <motion.div
-                className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6"
-                style={{
-                  backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                  border: '2px solid #10B981',
-                }}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: 'spring' }}
-              >
-                <svg className="w-10 h-10" style={{ color: '#10B981' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                background: 'rgba(34, 197, 94, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 16px'
+              }}>
+                <svg width="24" height="24" fill="none" stroke="var(--accent-green)" strokeWidth="2">
+                  <path d="M5 12l5 5L20 7" />
                 </svg>
-              </motion.div>
-              <h3 className="text-2xl font-bold text-white mb-2">You're on the list!</h3>
-              <p className="text-gray-400">
-                Thanks, {formData.name}! You'll be notified when coaching launches.
+              </div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '8px' }}>
+                You're on the list
+              </h3>
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                We'll notify you when AI coaching launches.
               </p>
             </motion.div>
           )}
