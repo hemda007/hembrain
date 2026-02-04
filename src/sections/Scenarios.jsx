@@ -154,41 +154,32 @@ const Scenarios = () => {
   const [selectedScenario, setSelectedScenario] = useState(null);
 
   return (
-    <section id="scenarios" className="section-padding relative">
+    <section id="scenarios" className="section relative">
       <div className="absolute inset-0 neural-bg" />
       <div className="absolute inset-0 grid-bg opacity-30" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="container relative z-10">
         {/* Section header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.span
-            className="text-xs font-semibold uppercase tracking-widest mb-4 block"
-            style={{ color: '#FF6B9D' }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Decision Frameworks
-          </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-white">Real </span>
+          <span className="section-label" style={{ color: '#FF6B9D' }}>Decision Frameworks</span>
+          <h2 className="section-title">
+            <span style={{ color: 'white' }}>Real </span>
             <span className="text-gradient-pink">Scenarios</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="section-description" style={{ margin: '0 auto' }}>
             Navigate life's tough decisions with frameworks that actually work.
             Select a scenario that resonates with your situation.
           </p>
         </motion.div>
 
         {/* Scenario cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid-3-cols">
           {scenarios.map((scenario, index) => (
             <motion.button
               key={scenario.id}

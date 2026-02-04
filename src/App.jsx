@@ -166,21 +166,21 @@ function App() {
         <Hero onEnterBrain={scrollToExplorer} />
 
         {/* Section divider */}
-        <div className="divider-gradient" />
+        <div className="divider" />
 
         <div ref={explorerRef}>
           <BrainExplorer />
         </div>
 
-        <div className="divider-gradient" />
+        <div className="divider" />
 
         <AskMeAnything />
 
-        <div className="divider-gradient" />
+        <div className="divider" />
 
         <Scenarios />
 
-        <div className="divider-gradient" />
+        <div className="divider" />
 
         <Coaching />
 

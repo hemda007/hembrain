@@ -23,41 +23,32 @@ const Coaching = () => {
   };
 
   return (
-    <section id="coaching" className="section-padding relative">
+    <section id="coaching" className="section relative">
       <div className="absolute inset-0 neural-bg" />
       <div className="absolute inset-0 grid-bg opacity-30" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="container relative z-10">
         {/* Section header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.span
-            className="text-xs font-semibold uppercase tracking-widest mb-4 block"
-            style={{ color: '#8B5CF6' }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Personal Growth
-          </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-white">Add Me As Your </span>
+          <span className="section-label">Personal Growth</span>
+          <h2 className="section-title">
+            <span style={{ color: 'white' }}>Add Me As Your </span>
             <span className="text-gradient-purple">Coach</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="section-description" style={{ margin: '0 auto' }}>
             Get personalized guidance based on mental models that actually work.
             From daily AI check-ins to live sessions.
           </p>
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
+        <div className="grid-2-cols" style={{ marginBottom: '80px' }}>
           {coachingPlans.map((plan, index) => (
             <motion.div
               key={plan.id}

@@ -33,17 +33,19 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative py-20 px-6"
+      className="relative"
       style={{
         borderTop: '1px solid rgba(139, 92, 246, 0.1)',
+        paddingTop: '80px',
+        paddingBottom: '60px',
       }}
     >
       <div className="absolute inset-0 neural-bg opacity-30" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
+      <div className="container relative z-10">
+        <div className="footer-grid" style={{ marginBottom: '60px' }}>
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div>
             <motion.h3
               className="text-3xl font-bold mb-6"
               initial={{ opacity: 0 }}
@@ -123,7 +125,7 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="divider-gradient mb-8" />
+        <div className="divider" style={{ marginBottom: '32px' }} />
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
