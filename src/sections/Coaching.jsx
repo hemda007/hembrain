@@ -1,65 +1,337 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 const coachingPlans = [
   {
-    id: '7-days',
-    name: '7 Days',
+    id: '7-day-ai',
+    name: '7-Day AI Coaching',
     duration: '1 Week',
-    price: '$49',
-    description: 'Quick brain sync for a specific challenge',
+    icon: '🤖',
+    price: 'Free',
+    originalPrice: '$49',
+    priceNote: 'Beta access',
+    badge: 'Free Beta',
+    description: 'AI-powered brain sync for quick decision clarity',
     features: [
-      'Daily thought streams tailored to you',
-      'Access to all mental models',
-      '3 personalized scenario analyses',
-      'Email support during your week',
-      'Decision-making frameworks'
+      'Full access to HemBrain AI interface',
+      'Personalized daily thought streams',
+      'All 50+ mental models library',
+      '5 scenario analyses per day',
+      'Decision framework templates',
+      'Community Discord access',
     ],
-    color: 'var(--accent-cyan)'
+    cta: 'Start Free Trial',
+    color: '#06b6d4',
   },
   {
-    id: '14-days',
-    name: '14 Days',
+    id: '10-day-live',
+    name: '10-Day + Live Session',
     duration: '2 Weeks',
-    price: '$89',
-    description: 'Deep dive into my thinking patterns and frameworks',
+    icon: '🧠',
+    price: '$99',
+    priceNote: 'One-time payment',
+    badge: 'Best Value',
+    description: 'Deep dive with 1-on-1 coaching from Hemanand',
     features: [
-      'Everything in 7 Days',
+      'Everything in 7-Day AI',
+      '30-min live video session with Hemanand',
       'Unlimited scenario analyses',
-      '1-on-1 async coaching session',
       'Custom framework creation',
       'Career roadmap review',
-      'Priority response time'
+      'Priority response within 4 hours',
+      'Lifetime access to updates',
     ],
+    cta: 'Get Started',
+    color: '#8B5CF6',
     popular: true,
-    color: 'var(--accent-purple)'
-  }
+  },
 ];
 
-const Coaching = () => {
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', challenge: '' });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.name && formData.email) {
-      setIsSubmitted(true);
-    }
-  };
+// Trust badges component
+const TrustBadges = () => {
+  const badges = [
+    { icon: '🛡️', text: '100% Money-back Guarantee' },
+    { icon: '🔒', text: 'Secure Payment' },
+    { icon: '⚡', text: 'Instant Access' },
+  ];
 
   return (
-    <section id="coaching" className="section">
-      <div className="container">
+    <div className="flex flex-wrap justify-center gap-6 mb-12">
+      {badges.map((badge, i) => (
+        <motion.div
+          key={badge.text}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 * i }}
+          className="flex items-center gap-2 text-sm text-gray-400"
+        >
+          <span>{badge.icon}</span>
+          <span>{badge.text}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+// Live counter component
+const LiveCounter = () => {
+  const [count] = useState(Math.floor(Math.random() * 20) + 15);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      className="flex items-center justify-center gap-3 mb-12"
+    >
+      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20">
+        <motion.div
+          className="w-2 h-2 rounded-full bg-green-400"
+          animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        <span className="text-sm font-mono">
+          <span className="text-purple-400 font-semibold">{count}</span>
+          <span className="text-gray-400"> minds exploring right now</span>
+        </span>
+      </div>
+    </motion.div>
+  );
+};
+
+// Pricing card component
+const PricingCard = ({ plan, index, isPopular }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative"
+    >
+      {/* Popular badge */}
+      {isPopular && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute -top-4 left-1/2 -translate-x-1/2 z-10"
+        >
+          <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg">
+            Most Popular
+          </span>
+        </motion.div>
+      )}
+
+      <motion.div
+        className="h-full rounded-2xl transition-all duration-500"
+        style={{
+          background: isPopular
+            ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.05))'
+            : 'var(--bg-card)',
+          border: isPopular
+            ? '1px solid rgba(139, 92, 246, 0.3)'
+            : '1px solid var(--border-subtle)',
+          boxShadow: isHovered
+            ? isPopular
+              ? '0 20px 60px rgba(139, 92, 246, 0.2)'
+              : '0 20px 40px rgba(0, 0, 0, 0.3)'
+            : 'none',
+        }}
+        whileHover={{ y: -8 }}
+      >
+        <div className="p-8">
+          {/* Icon */}
+          <motion.div
+            className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
+            style={{
+              background: `linear-gradient(135deg, ${plan.color}20, ${plan.color}05)`,
+              border: `1px solid ${plan.color}30`,
+            }}
+            animate={isHovered ? { scale: 1.05, rotate: [0, 5, -5, 0] } : {}}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="text-2xl">{plan.icon}</span>
+          </motion.div>
+
+          {/* Title & Badge */}
+          <div className="flex items-start justify-between mb-2">
+            <h3 className="text-xl font-bold">{plan.name}</h3>
+            {plan.badge && (
+              <span
+                className="px-3 py-1 rounded-full text-xs font-semibold"
+                style={{
+                  background: `${plan.color}15`,
+                  color: plan.color,
+                }}
+              >
+                {plan.badge}
+              </span>
+            )}
+          </div>
+
+          {/* Description */}
+          <p className="text-sm text-gray-400 mb-6">{plan.description}</p>
+
+          {/* Price */}
+          <div className="mb-6">
+            <div className="flex items-baseline gap-2">
+              <span className="text-4xl font-bold">{plan.price}</span>
+              {plan.originalPrice && (
+                <span className="text-lg text-gray-500 line-through">{plan.originalPrice}</span>
+              )}
+            </div>
+            {plan.priceNote && (
+              <p className="text-xs text-gray-500 mt-1">{plan.priceNote}</p>
+            )}
+          </div>
+
+          {/* CTA Button */}
+          <motion.button
+            className={`w-full py-4 rounded-xl font-semibold transition-all ${
+              isPopular
+                ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
+                : 'bg-white/5 text-white border border-white/10 hover:bg-white/10'
+            }`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {plan.cta}
+          </motion.button>
+
+          {/* Features */}
+          <div className="mt-8 pt-8 border-t border-white/5">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">
+              What's included
+            </p>
+            <ul className="space-y-3">
+              {plan.features.map((feature, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="flex items-start gap-3"
+                >
+                  <div
+                    className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                    style={{
+                      background: `${plan.color}15`,
+                    }}
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke={plan.color}
+                      strokeWidth={3}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">{feature}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// Testimonial carousel item
+const TestimonialCard = ({ testimonial, index }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.1 }}
+    className="p-6 rounded-2xl"
+    style={{
+      background: 'var(--bg-card)',
+      border: '1px solid var(--border-subtle)',
+    }}
+  >
+    <div className="flex items-center gap-4 mb-4">
+      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center">
+        <span className="text-xl">{testimonial.avatar}</span>
+      </div>
+      <div>
+        <p className="font-semibold">{testimonial.name}</p>
+        <p className="text-xs text-gray-500">{testimonial.role}</p>
+      </div>
+    </div>
+    <p className="text-sm text-gray-400 leading-relaxed italic">"{testimonial.quote}"</p>
+    <div className="flex items-center gap-1 mt-4">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <svg
+          key={star}
+          className="w-4 h-4 text-yellow-400"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  </motion.div>
+);
+
+const Coaching = () => {
+  const testimonials = [
+    {
+      name: 'Priya S.',
+      role: 'Data Analyst',
+      avatar: '👩‍💼',
+      quote: 'The mental models framework completely changed how I approach career decisions. Worth every penny.',
+    },
+    {
+      name: 'Rahul M.',
+      role: 'Product Manager',
+      avatar: '👨‍💻',
+      quote: 'Finally, practical advice that works in the real Indian tech industry context.',
+    },
+    {
+      name: 'Ananya K.',
+      role: 'Fresher',
+      avatar: '👩‍🎓',
+      quote: 'From confused fresher to confident professional. The 7-day program was transformative.',
+    },
+  ];
+
+  return (
+    <section id="coaching" className="section relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 60% 50% at 50% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse 40% 40% at 20% 100%, rgba(236, 72, 153, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse 40% 40% at 80% 100%, rgba(59, 130, 246, 0.06) 0%, transparent 50%)
+            `,
+          }}
+        />
+      </div>
+
+      <div className="container relative z-10">
         {/* Header */}
         <div className="section-header">
           <motion.span
             className="section-label"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Personal Coaching
+            <span className="status-dot status-dot-glow" />
+            Brain Sync
           </motion.span>
           <motion.h2
             className="heading-lg section-title"
@@ -67,7 +339,7 @@ const Coaching = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Add me as your coach
+            Sync with my <span className="text-gradient">brain</span>
           </motion.h2>
           <motion.p
             className="section-description"
@@ -76,297 +348,99 @@ const Coaching = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Sync my brain with yours. Get personalized guidance on career decisions,
-            data analytics, and life frameworks.
+            Get personalized coaching and access to my complete mental model library.
+            Transform your decision-making in just days.
           </motion.p>
         </div>
 
-        {/* Plans */}
-        <div className="grid-2" style={{ maxWidth: '800px', margin: '0 auto 60px' }}>
+        {/* Live Counter */}
+        <LiveCounter />
+
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
           {coachingPlans.map((plan, index) => (
-            <motion.div
+            <PricingCard
               key={plan.id}
-              className="card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              style={{
-                border: plan.popular
-                  ? `1px solid ${plan.color}`
-                  : '1px solid var(--border-subtle)',
-                position: 'relative',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
-              onClick={() => setSelectedPlan(plan)}
-              whileHover={{ y: -4, borderColor: plan.color }}
-            >
-              {plan.popular && (
-                <span style={{
-                  position: 'absolute',
-                  top: '-12px',
-                  left: '24px',
-                  padding: '4px 12px',
-                  fontSize: '0.75rem',
-                  fontWeight: '600',
-                  background: plan.color,
-                  color: 'white',
-                  borderRadius: '100px'
-                }}>
-                  Most Popular
-                </span>
-              )}
-
-              {/* Duration Badge */}
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '6px 12px',
-                background: `${plan.color}15`,
-                borderRadius: '100px',
-                marginBottom: '20px'
-              }}>
-                <div style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  background: plan.color
-                }} />
-                <span style={{
-                  fontSize: '0.75rem',
-                  fontWeight: '600',
-                  color: plan.color
-                }}>
-                  {plan.duration}
-                </span>
-              </div>
-
-              <h3 style={{
-                fontSize: '1.5rem',
-                fontWeight: '700',
-                marginBottom: '8px'
-              }}>
-                {plan.name}
-              </h3>
-
-              <div style={{ marginBottom: '16px' }}>
-                <span style={{ fontSize: '2.5rem', fontWeight: '700' }}>{plan.price}</span>
-              </div>
-
-              <p style={{
-                fontSize: '0.875rem',
-                color: 'var(--text-secondary)',
-                marginBottom: '24px',
-                lineHeight: '1.6'
-              }}>
-                {plan.description}
-              </p>
-
-              <ul style={{ listStyle: 'none', marginBottom: '24px' }}>
-                {plan.features.map((feature) => (
-                  <li
-                    key={feature}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '10px',
-                      fontSize: '0.875rem',
-                      color: 'var(--text-secondary)',
-                      marginBottom: '10px'
-                    }}
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      fill="none"
-                      stroke={plan.color}
-                      strokeWidth="2"
-                      style={{ marginTop: '2px', flexShrink: 0 }}
-                    >
-                      <path d="M4 8l3 3 5-6" />
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <motion.button
-                className={`btn w-full ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
-                style={{
-                  marginTop: 'auto',
-                  background: plan.popular ? plan.color : undefined
-                }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Start {plan.name} Coaching
-              </motion.button>
-            </motion.div>
+              plan={plan}
+              index={index}
+              isPopular={plan.popular}
+            />
           ))}
         </div>
 
-        {/* How it works */}
+        {/* Trust Badges */}
+        <TrustBadges />
+
+        {/* Testimonials */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          style={{
-            maxWidth: '700px',
-            margin: '0 auto 60px',
-            padding: '40px',
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-xl)'
-          }}
+          className="mt-20"
         >
-          <h3 style={{
-            fontSize: '1.125rem',
-            fontWeight: '600',
-            marginBottom: '24px',
-            textAlign: 'center'
-          }}>
-            How Brain Coaching Works
+          <h3 className="text-center text-lg font-semibold mb-8">
+            What others are saying
           </h3>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '24px'
-          }}>
-            {[
-              { step: '01', title: 'Share your challenge', desc: 'Tell me what decision you\'re facing' },
-              { step: '02', title: 'Receive frameworks', desc: 'Get mental models tailored to your situation' },
-              { step: '03', title: 'Navigate with clarity', desc: 'Make decisions backed by proven patterns' }
-            ].map((item) => (
-              <div key={item.step} style={{ textAlign: 'center' }}>
-                <div style={{
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
-                  color: 'var(--accent-purple)',
-                  marginBottom: '12px'
-                }}>
-                  {item.step}
-                </div>
-                <div style={{
-                  fontSize: '0.9375rem',
-                  fontWeight: '600',
-                  marginBottom: '8px'
-                }}>
-                  {item.title}
-                </div>
-                <div style={{
-                  fontSize: '0.8125rem',
-                  color: 'var(--text-tertiary)',
-                  lineHeight: '1.5'
-                }}>
-                  {item.desc}
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCard key={testimonial.name} testimonial={testimonial} index={index} />
             ))}
           </div>
         </motion.div>
 
-        {/* Contact Form */}
+        {/* What happens next */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="mt-20 p-8 rounded-2xl text-center"
           style={{
-            maxWidth: '480px',
-            margin: '0 auto',
-            textAlign: 'center'
+            background: 'rgba(10, 10, 15, 0.6)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid var(--border-subtle)',
           }}
         >
-          {!isSubmitted ? (
-            <>
-              <h3 style={{
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                marginBottom: '8px'
-              }}>
-                Ready to sync?
-              </h3>
-              <p style={{
-                fontSize: '0.875rem',
-                color: 'var(--text-secondary)',
-                marginBottom: '24px'
-              }}>
-                Tell me your challenge and let's get started.
-              </p>
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Your name"
-                  className="input"
-                  required
-                />
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="your@email.com"
-                  className="input"
-                  required
-                />
-                <textarea
-                  value={formData.challenge}
-                  onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
-                  placeholder="What decision are you facing? (optional)"
-                  className="input"
-                  style={{ minHeight: '100px', resize: 'vertical' }}
-                />
-                <motion.button
-                  type="submit"
-                  className="btn btn-primary"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get Started
-                </motion.button>
-              </form>
-            </>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                background: 'rgba(34, 197, 94, 0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 16px'
-              }}>
-                <svg width="24" height="24" fill="none" stroke="var(--accent-green)" strokeWidth="2">
-                  <path d="M5 12l5 5L20 7" />
-                </svg>
-              </div>
-              <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '8px' }}>
-                Brain sync initiated
-              </h3>
-              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                I'll reach out within 24 hours to start your coaching journey.
-              </p>
-            </motion.div>
-          )}
+          <h3 className="text-xl font-bold mb-6">What happens after you sign up?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: '1',
+                title: 'Instant Access',
+                description: 'Get immediate access to the AI brain interface and starter frameworks',
+                icon: '⚡',
+              },
+              {
+                step: '2',
+                title: 'Daily Insights',
+                description: 'Receive personalized coaching based on your specific goals',
+                icon: '🎯',
+              },
+              {
+                step: '3',
+                title: 'Transform',
+                description: 'Apply mental models to real decisions and see the difference',
+                icon: '🚀',
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i }}
+                className="relative"
+              >
+                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">{item.icon}</span>
+                </div>
+                <p className="text-xs text-purple-400 font-semibold mb-2">Step {item.step}</p>
+                <h4 className="font-semibold mb-2">{item.title}</h4>
+                <p className="text-sm text-gray-400">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
-
-      {/* Responsive */}
-      <style>{`
-        @media (max-width: 640px) {
-          .grid-2 > div {
-            padding: 24px !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
