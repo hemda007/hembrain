@@ -2,284 +2,243 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { scenarios } from '../data';
 
-const ScenarioModal = ({ scenario, onClose }) => {
-  const [situation, setSituation] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = () => {
-    if (situation.trim()) {
-      setSubmitted(true);
-    }
-  };
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Backdrop */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          backdropFilter: 'blur(8px)',
-        }}
-        onClick={onClose}
-      />
-
-      {/* Modal */}
-      <motion.div
-        className="relative rounded-2xl p-8 max-w-lg w-full"
-        style={{
-          backgroundColor: 'rgba(10, 10, 26, 0.98)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-        }}
-        initial={{ scale: 0.9, y: 20, opacity: 0 }}
-        animate={{ scale: 1, y: 0, opacity: 1 }}
-        exit={{ scale: 0.9, y: 20, opacity: 0 }}
-        transition={{ type: 'spring', damping: 25 }}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-          style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-        >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        {!submitted ? (
-          <>
-            {/* Header */}
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-5xl">{scenario.icon}</span>
-              <div>
-                <span
-                  className="text-xs font-semibold px-3 py-1 rounded-full"
-                  style={{
-                    backgroundColor: `${scenario.color}15`,
-                    color: scenario.color,
-                  }}
-                >
-                  {scenario.category}
-                </span>
-                <h3 className="text-xl font-bold text-white mt-2">{scenario.title}</h3>
-              </div>
-            </div>
-
-            <p className="text-gray-400 mb-6 leading-relaxed">{scenario.description}</p>
-
-            {/* Situation input */}
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-300 mb-3">
-                Describe your specific situation
-              </label>
-              <textarea
-                value={situation}
-                onChange={(e) => setSituation(e.target.value)}
-                placeholder="Tell me about your situation in detail. What's the context? What have you tried? What's holding you back?"
-                className="input-premium h-32 resize-none"
-              />
-            </div>
-
-            {/* Submit button */}
-            <motion.button
-              onClick={handleSubmit}
-              disabled={!situation.trim()}
-              className="w-full py-4 rounded-xl font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                background: `linear-gradient(135deg, ${scenario.color}, ${scenario.color}aa)`,
-              }}
-              whileHover={situation.trim() ? {
-                scale: 1.02,
-                boxShadow: `0 10px 30px ${scenario.color}40`,
-              } : {}}
-              whileTap={situation.trim() ? { scale: 0.98 } : {}}
-            >
-              Get Personalized Advice
-            </motion.button>
-
-            <p className="text-xs text-gray-500 mt-4 text-center">
-              MVP mode: Your scenario will be queued for the AI response feature.
-            </p>
-          </>
-        ) : (
-          <motion.div
-            className="text-center py-8"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-          >
-            <motion.div
-              className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6"
-              style={{
-                backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                border: '2px solid #10B981',
-              }}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', delay: 0.2 }}
-            >
-              <svg className="w-10 h-10" style={{ color: '#10B981' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            </motion.div>
-            <h3 className="text-xl font-bold text-white mb-2">Scenario Submitted!</h3>
-            <p className="text-gray-400 mb-6">
-              Your situation has been recorded. In the full version, you'll receive personalized advice.
-            </p>
-            <motion.button
-              onClick={onClose}
-              className="px-8 py-3 rounded-xl text-white font-medium transition-all"
-              style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-              }}
-              whileHover={{ borderColor: '#00D4FF' }}
-            >
-              Close
-            </motion.button>
-          </motion.div>
-        )}
-      </motion.div>
-    </motion.div>
-  );
-};
-
 const Scenarios = () => {
   const [selectedScenario, setSelectedScenario] = useState(null);
 
   return (
-    <section id="scenarios" className="section relative">
-      <div className="absolute inset-0 neural-bg" />
-      <div className="absolute inset-0 grid-bg opacity-30" />
-
-      <div className="container relative z-10">
-        {/* Section header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="section-label" style={{ color: '#FF6B9D' }}>Decision Frameworks</span>
-          <h2 className="section-title">
-            <span style={{ color: 'white' }}>Real </span>
-            <span className="text-gradient-pink">Scenarios</span>
-          </h2>
-          <p className="section-description" style={{ margin: '0 auto' }}>
+    <section id="scenarios" className="section">
+      <div className="container">
+        {/* Header */}
+        <div className="section-header">
+          <motion.span
+            className="section-label"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Decision Frameworks
+          </motion.span>
+          <motion.h2
+            className="heading-lg section-title"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Real scenarios
+          </motion.h2>
+          <motion.p
+            className="section-description"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
             Navigate life's tough decisions with frameworks that actually work.
-            Select a scenario that resonates with your situation.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
-        {/* Scenario cards grid */}
-        <div className="grid-3-cols">
+        {/* Scenarios Grid */}
+        <div className="grid-3">
           {scenarios.map((scenario, index) => (
             <motion.button
               key={scenario.id}
               onClick={() => setSelectedScenario(scenario)}
-              className="group relative p-6 rounded-2xl text-left glass-card glass-card-hover"
+              className="card card-interactive"
+              style={{ textAlign: 'left' }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -4 }}
             >
               {/* Icon */}
-              <span className="text-4xl mb-4 block">{scenario.icon}</span>
+              <span style={{ fontSize: '2rem', marginBottom: '16px', display: 'block' }}>
+                {scenario.icon}
+              </span>
 
-              {/* Category badge */}
-              <span
-                className="text-xs font-semibold px-3 py-1 rounded-full inline-block mb-3"
-                style={{
-                  backgroundColor: `${scenario.color}15`,
-                  color: scenario.color,
-                }}
-              >
+              {/* Category */}
+              <span style={{
+                fontSize: '0.75rem',
+                fontWeight: '500',
+                color: scenario.color,
+                marginBottom: '12px',
+                display: 'block'
+              }}>
                 {scenario.category}
               </span>
 
               {/* Title */}
-              <h3
-                className="text-lg font-semibold text-white mb-2 transition-colors"
-                style={{
-                  color: 'white',
-                }}
-              >
+              <h3 style={{
+                fontSize: '1rem',
+                fontWeight: '600',
+                marginBottom: '8px'
+              }}>
                 {scenario.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-gray-500 mb-4 leading-relaxed">
+              <p style={{
+                fontSize: '0.875rem',
+                color: 'var(--text-secondary)',
+                lineHeight: '1.6'
+              }}>
                 {scenario.description}
               </p>
-
-              {/* Arrow indicator */}
-              <div className="flex items-center gap-2 text-gray-500 group-hover:text-white transition-all">
-                <span className="text-sm">Explore</span>
-                <motion.svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  style={{ color: scenario.color }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </motion.svg>
-              </div>
-
-              {/* Hover border color */}
-              <motion.div
-                className="absolute inset-0 rounded-2xl pointer-events-none"
-                style={{
-                  border: `1px solid transparent`,
-                }}
-                whileHover={{
-                  borderColor: scenario.color,
-                  boxShadow: `0 20px 40px ${scenario.color}15`,
-                }}
-              />
             </motion.button>
           ))}
         </div>
-
-        {/* Add your own scenario */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-500 mb-4">Don't see your scenario?</p>
-          <motion.button
-            className="px-8 py-3 rounded-xl text-white font-medium transition-all"
-            style={{
-              background: 'rgba(18, 18, 42, 0.6)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-            }}
-            whileHover={{
-              borderColor: '#FF6B9D',
-              boxShadow: '0 0 30px rgba(255, 107, 157, 0.15)',
-            }}
-            whileTap={{ scale: 0.98 }}
-          >
-            + Describe Your Own
-          </motion.button>
-        </motion.div>
       </div>
 
       {/* Modal */}
       <AnimatePresence>
         {selectedScenario && (
-          <ScenarioModal
-            scenario={selectedScenario}
-            onClose={() => setSelectedScenario(null)}
-          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 100,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '24px'
+            }}
+          >
+            <motion.div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(0, 0, 0, 0.8)',
+                backdropFilter: 'blur(8px)'
+              }}
+              onClick={() => setSelectedScenario(null)}
+            />
+
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '480px',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 'var(--radius-xl)',
+                padding: '40px',
+                maxHeight: '90vh',
+                overflow: 'auto'
+              }}
+            >
+              {/* Close */}
+              <button
+                onClick={() => setSelectedScenario(null)}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  background: 'var(--bg-tertiary)',
+                  border: 'none',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4l8 8M4 12l8-8" />
+                </svg>
+              </button>
+
+              {/* Content */}
+              <span style={{ fontSize: '2.5rem', marginBottom: '20px', display: 'block' }}>
+                {selectedScenario.icon}
+              </span>
+
+              <span style={{
+                fontSize: '0.75rem',
+                fontWeight: '500',
+                color: selectedScenario.color,
+                marginBottom: '8px',
+                display: 'block'
+              }}>
+                {selectedScenario.category}
+              </span>
+
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '700',
+                marginBottom: '12px'
+              }}>
+                {selectedScenario.title}
+              </h3>
+
+              <p style={{
+                color: 'var(--text-secondary)',
+                marginBottom: '32px',
+                lineHeight: '1.7'
+              }}>
+                {selectedScenario.description}
+              </p>
+
+              {/* Framework */}
+              {selectedScenario.framework && (
+                <div>
+                  <h4 style={{
+                    fontSize: '0.75rem',
+                    fontWeight: '600',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    color: 'var(--text-tertiary)',
+                    marginBottom: '16px'
+                  }}>
+                    My Framework
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {selectedScenario.framework.map((item, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          display: 'flex',
+                          gap: '12px',
+                          alignItems: 'flex-start'
+                        }}
+                      >
+                        <span style={{
+                          width: '24px',
+                          height: '24px',
+                          borderRadius: '50%',
+                          background: `${selectedScenario.color}15`,
+                          color: selectedScenario.color,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '0.75rem',
+                          fontWeight: '600',
+                          flexShrink: 0
+                        }}>
+                          {i + 1}
+                        </span>
+                        <span style={{
+                          fontSize: '0.875rem',
+                          color: 'var(--text-secondary)',
+                          lineHeight: '1.6'
+                        }}>
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>
