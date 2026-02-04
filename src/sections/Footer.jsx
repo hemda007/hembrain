@@ -32,37 +32,51 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative py-16 px-4 border-t border-gray-800">
-      <div className="absolute inset-0 neural-bg opacity-20" />
+    <footer
+      className="relative py-20 px-6"
+      style={{
+        borderTop: '1px solid rgba(139, 92, 246, 0.1)',
+      }}
+    >
+      <div className="absolute inset-0 neural-bg opacity-30" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className="grid md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="md:col-span-2">
             <motion.h3
-              className="text-2xl font-bold mb-4"
+              className="text-3xl font-bold mb-6"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
-              <span className="text-glow-purple text-soft-purple">Hem</span>
-              <span className="text-glow-blue text-electric-blue">Brain</span>
+              <span className="text-gradient-purple">Hem</span>
+              <span className="text-gradient-blue">Brain</span>
             </motion.h3>
-            <p className="text-gray-400 text-sm mb-6 max-w-sm">
+            <p className="text-gray-400 text-sm mb-8 max-w-sm leading-relaxed">
               An interactive mind interface where thoughts, frameworks, and mental models
               come together to help you navigate life's decisions.
             </p>
 
             {/* Social links */}
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {socialLinks.map((link) => (
                 <motion.a
                   key={link.name}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-dark-card border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-electric-blue transition-colors"
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="w-11 h-11 rounded-xl flex items-center justify-center text-gray-400 transition-all"
+                  style={{
+                    background: 'rgba(18, 18, 42, 0.6)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                  }}
+                  whileHover={{
+                    scale: 1.1,
+                    y: -3,
+                    borderColor: '#8B5CF6',
+                    color: '#fff',
+                  }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {link.icon}
@@ -73,16 +87,17 @@ const Footer = () => {
 
           {/* Navigation */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Explore</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-6">Explore</h4>
+            <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <motion.a
                     href={link.href}
-                    className="text-gray-400 hover:text-electric-blue transition-colors text-sm"
+                    className="text-gray-400 text-sm transition-colors"
+                    whileHover={{ color: '#00D4FF', x: 3 }}
                   >
                     {link.name}
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>
@@ -90,52 +105,42 @@ const Footer = () => {
 
           {/* About */}
           <div>
-            <h4 className="font-semibold text-white mb-4">About</h4>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-electric-blue transition-colors text-sm"
-                >
-                  About This Project
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-electric-blue transition-colors text-sm"
-                >
-                  How It Works
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-electric-blue transition-colors text-sm"
-                >
-                  Privacy Policy
-                </a>
-              </li>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-6">About</h4>
+            <ul className="space-y-3">
+              {['About This Project', 'How It Works', 'Privacy Policy'].map((item) => (
+                <li key={item}>
+                  <motion.a
+                    href="#"
+                    className="text-gray-400 text-sm transition-colors"
+                    whileHover={{ color: '#00D4FF', x: 3 }}
+                  >
+                    {item}
+                  </motion.a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
+        {/* Divider */}
+        <div className="divider-gradient mb-8" />
+
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            {currentYear} HemBrain. Built with thoughts and frameworks.
+            © {currentYear} HemBrain. Built with thoughts and frameworks.
           </p>
 
           {/* Sync status */}
-          <div className="flex items-center gap-2 text-xs text-gray-500">
+          <div className="flex items-center gap-3 text-xs text-gray-500">
             <motion.div
-              className="flex items-center gap-1"
+              className="flex items-center gap-1.5"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-electric-blue" />
-              <span className="w-1.5 h-1.5 rounded-full bg-soft-purple" />
-              <span className="w-1.5 h-1.5 rounded-full bg-neural-pink" />
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#00D4FF' }} />
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#8B5CF6' }} />
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#FF6B9D' }} />
             </motion.div>
             <span>Brain syncing continuously</span>
           </div>

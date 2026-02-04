@@ -21,26 +21,34 @@ const ScenarioModal = ({ scenario, onClose }) => {
     >
       {/* Backdrop */}
       <motion.div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        className="absolute inset-0"
+        style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backdropFilter: 'blur(8px)',
+        }}
         onClick={onClose}
       />
 
       {/* Modal */}
       <motion.div
-        className="relative bg-dark-surface rounded-2xl p-8 max-w-lg w-full border border-gray-700"
+        className="relative rounded-2xl p-8 max-w-lg w-full"
         style={{
-          backgroundColor: 'rgba(18, 18, 42, 0.95)',
+          backgroundColor: 'rgba(10, 10, 26, 0.98)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
         }}
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
+        initial={{ scale: 0.9, y: 20, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 20, opacity: 0 }}
+        transition={{ type: 'spring', damping: 25 }}
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+          style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
         >
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -49,33 +57,33 @@ const ScenarioModal = ({ scenario, onClose }) => {
           <>
             {/* Header */}
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-4xl">{scenario.icon}</span>
+              <span className="text-5xl">{scenario.icon}</span>
               <div>
                 <span
-                  className="text-xs font-semibold px-2 py-1 rounded-full"
+                  className="text-xs font-semibold px-3 py-1 rounded-full"
                   style={{
-                    backgroundColor: `${scenario.color}20`,
+                    backgroundColor: `${scenario.color}15`,
                     color: scenario.color,
                   }}
                 >
                   {scenario.category}
                 </span>
-                <h3 className="text-xl font-bold text-white mt-1">{scenario.title}</h3>
+                <h3 className="text-xl font-bold text-white mt-2">{scenario.title}</h3>
               </div>
             </div>
 
-            <p className="text-gray-400 mb-6">{scenario.description}</p>
+            <p className="text-gray-400 mb-6 leading-relaxed">{scenario.description}</p>
 
             {/* Situation input */}
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-300 mb-3">
                 Describe your specific situation
               </label>
               <textarea
                 value={situation}
                 onChange={(e) => setSituation(e.target.value)}
                 placeholder="Tell me about your situation in detail. What's the context? What have you tried? What's holding you back?"
-                className="w-full h-32 bg-dark-bg border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electric-blue transition-colors resize-none"
+                className="input-premium h-32 resize-none"
               />
             </div>
 
@@ -83,17 +91,20 @@ const ScenarioModal = ({ scenario, onClose }) => {
             <motion.button
               onClick={handleSubmit}
               disabled={!situation.trim()}
-              className="w-full py-3 rounded-xl font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 rounded-xl font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 background: `linear-gradient(135deg, ${scenario.color}, ${scenario.color}aa)`,
               }}
-              whileHover={{ scale: situation.trim() ? 1.02 : 1 }}
-              whileTap={{ scale: situation.trim() ? 0.98 : 1 }}
+              whileHover={situation.trim() ? {
+                scale: 1.02,
+                boxShadow: `0 10px 30px ${scenario.color}40`,
+              } : {}}
+              whileTap={situation.trim() ? { scale: 0.98 } : {}}
             >
               Get Personalized Advice
             </motion.button>
 
-            <p className="text-xs text-gray-500 mt-3 text-center">
+            <p className="text-xs text-gray-500 mt-4 text-center">
               MVP mode: Your scenario will be queued for the AI response feature.
             </p>
           </>
@@ -104,25 +115,34 @@ const ScenarioModal = ({ scenario, onClose }) => {
             animate={{ opacity: 1, scale: 1 }}
           >
             <motion.div
-              className="w-20 h-20 mx-auto rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mb-6"
+              className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6"
+              style={{
+                backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                border: '2px solid #10B981',
+              }}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: 'spring', delay: 0.2 }}
             >
-              <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-10 h-10" style={{ color: '#10B981' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </motion.div>
             <h3 className="text-xl font-bold text-white mb-2">Scenario Submitted!</h3>
             <p className="text-gray-400 mb-6">
-              Your situation has been recorded. In the full version, you'll receive personalized advice based on my frameworks and experiences.
+              Your situation has been recorded. In the full version, you'll receive personalized advice.
             </p>
-            <button
+            <motion.button
               onClick={onClose}
-              className="px-6 py-2 rounded-lg bg-dark-card border border-gray-700 text-white hover:border-electric-blue transition-colors"
+              className="px-8 py-3 rounded-xl text-white font-medium transition-all"
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+              }}
+              whileHover={{ borderColor: '#00D4FF' }}
             >
               Close
-            </button>
+            </motion.button>
           </motion.div>
         )}
       </motion.div>
@@ -134,22 +154,34 @@ const Scenarios = () => {
   const [selectedScenario, setSelectedScenario] = useState(null);
 
   return (
-    <section id="scenarios" className="min-h-screen py-20 px-4 relative">
-      <div className="absolute inset-0 neural-bg opacity-30" />
+    <section id="scenarios" className="section-padding relative">
+      <div className="absolute inset-0 neural-bg" />
+      <div className="absolute inset-0 grid-bg opacity-30" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <motion.span
+            className="text-xs font-semibold uppercase tracking-widest mb-4 block"
+            style={{ color: '#FF6B9D' }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Decision Frameworks
+          </motion.span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="text-white">Real </span>
-            <span className="text-glow-pink text-neural-pink">Scenarios</span>
+            <span className="text-gradient-pink">Scenarios</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-xl mx-auto leading-relaxed">
             Navigate life's tough decisions with frameworks that actually work.
             Select a scenario that resonates with your situation.
           </p>
@@ -161,29 +193,20 @@ const Scenarios = () => {
             <motion.button
               key={scenario.id}
               onClick={() => setSelectedScenario(scenario)}
-              className="group relative p-6 rounded-2xl text-left transition-all"
-              style={{
-                backgroundColor: 'rgba(26, 26, 58, 0.5)',
-                border: '1px solid rgba(255,255,255,0.1)',
-              }}
+              className="group relative p-6 rounded-2xl text-left glass-card glass-card-hover"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{
-                y: -5,
-                borderColor: scenario.color,
-                boxShadow: `0 10px 40px ${scenario.color}20`,
-              }}
             >
               {/* Icon */}
               <span className="text-4xl mb-4 block">{scenario.icon}</span>
 
               {/* Category badge */}
               <span
-                className="text-xs font-semibold px-2 py-1 rounded-full inline-block mb-3"
+                className="text-xs font-semibold px-3 py-1 rounded-full inline-block mb-3"
                 style={{
-                  backgroundColor: `${scenario.color}20`,
+                  backgroundColor: `${scenario.color}15`,
                   color: scenario.color,
                 }}
               >
@@ -191,35 +214,43 @@ const Scenarios = () => {
               </span>
 
               {/* Title */}
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-electric-blue transition-colors">
+              <h3
+                className="text-lg font-semibold text-white mb-2 transition-colors"
+                style={{
+                  color: 'white',
+                }}
+              >
                 {scenario.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-gray-500 mb-4">
+              <p className="text-sm text-gray-500 mb-4 leading-relaxed">
                 {scenario.description}
               </p>
 
               {/* Arrow indicator */}
-              <div className="flex items-center gap-2 text-gray-500 group-hover:text-electric-blue transition-all">
+              <div className="flex items-center gap-2 text-gray-500 group-hover:text-white transition-all">
                 <span className="text-sm">Explore</span>
                 <motion.svg
                   className="w-4 h-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  animate={{ x: [0, 3, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  style={{ color: scenario.color }}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </motion.svg>
               </div>
 
-              {/* Hover glow effect */}
+              {/* Hover border color */}
               <motion.div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity -z-10"
+                className="absolute inset-0 rounded-2xl pointer-events-none"
                 style={{
-                  background: `radial-gradient(circle at center, ${scenario.color}10, transparent)`,
+                  border: `1px solid transparent`,
+                }}
+                whileHover={{
+                  borderColor: scenario.color,
+                  boxShadow: `0 20px 40px ${scenario.color}15`,
                 }}
               />
             </motion.button>
@@ -228,15 +259,22 @@ const Scenarios = () => {
 
         {/* Add your own scenario */}
         <motion.div
-          className="text-center mt-12"
+          className="text-center mt-16"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
           <p className="text-gray-500 mb-4">Don't see your scenario?</p>
           <motion.button
-            className="px-6 py-3 rounded-xl bg-dark-card border border-gray-700 text-white font-medium hover:border-electric-blue transition-colors"
-            whileHover={{ scale: 1.02 }}
+            className="px-8 py-3 rounded-xl text-white font-medium transition-all"
+            style={{
+              background: 'rgba(18, 18, 42, 0.6)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+            }}
+            whileHover={{
+              borderColor: '#FF6B9D',
+              boxShadow: '0 0 30px rgba(255, 107, 157, 0.15)',
+            }}
             whileTap={{ scale: 0.98 }}
           >
             + Describe Your Own

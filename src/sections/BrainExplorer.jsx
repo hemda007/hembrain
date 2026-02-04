@@ -15,28 +15,35 @@ const RegionModal = ({ region, onClose }) => {
     >
       {/* Backdrop */}
       <motion.div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        className="absolute inset-0"
+        style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backdropFilter: 'blur(8px)',
+        }}
         onClick={onClose}
       />
 
       {/* Modal */}
       <motion.div
-        className="relative bg-dark-surface rounded-2xl p-8 max-w-lg w-full border"
+        className="relative rounded-2xl p-8 max-w-lg w-full"
         style={{
-          borderColor: region.color,
-          boxShadow: `0 0 40px ${region.color}40`,
-          backgroundColor: 'rgba(18, 18, 42, 0.95)',
+          border: `1px solid ${region.color}`,
+          boxShadow: `0 0 60px ${region.color}30`,
+          backgroundColor: 'rgba(10, 10, 26, 0.98)',
+          backdropFilter: 'blur(20px)',
         }}
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
+        initial={{ scale: 0.9, y: 20, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 20, opacity: 0 }}
+        transition={{ type: 'spring', damping: 25 }}
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+          style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
         >
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -54,9 +61,9 @@ const RegionModal = ({ region, onClose }) => {
           transition={{ duration: 2, repeat: Infinity }}
         >
           <motion.div
-            className="w-3 h-3 rounded-full"
+            className="w-4 h-4 rounded-full"
             style={{ backgroundColor: region.color }}
-            animate={{ scale: [1, 1.5, 1] }}
+            animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
         </motion.div>
@@ -71,17 +78,17 @@ const RegionModal = ({ region, onClose }) => {
 
         {/* Topics */}
         <div className="mb-6">
-          <h4 className="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">
+          <h4 className="text-xs font-semibold text-gray-500 mb-3 uppercase tracking-widest">
             Key Topics
           </h4>
           <div className="flex flex-wrap gap-2">
             {region.topics.map((topic, index) => (
               <motion.span
                 key={topic}
-                className="px-3 py-1 rounded-full text-sm"
+                className="px-3 py-1.5 rounded-full text-sm font-medium"
                 style={{
-                  backgroundColor: `${region.color}20`,
-                  border: `1px solid ${region.color}50`,
+                  backgroundColor: `${region.color}15`,
+                  border: `1px solid ${region.color}40`,
                   color: region.color,
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -95,23 +102,30 @@ const RegionModal = ({ region, onClose }) => {
         </div>
 
         {/* Placeholder content */}
-        <div className="bg-dark-bg/50 rounded-lg p-4 border border-gray-700">
-          <p className="text-gray-400 text-sm italic">
+        <div
+          className="rounded-xl p-4"
+          style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+          }}
+        >
+          <p className="text-gray-500 text-sm">
             Deep-dive content coming soon. This region will contain articles, frameworks, and interactive explorations.
           </p>
         </div>
 
         {/* Explore button */}
         <motion.button
-          className="mt-6 w-full py-3 rounded-lg font-semibold transition-all"
+          className="mt-6 w-full py-3.5 rounded-xl font-semibold transition-all"
           style={{
-            backgroundColor: `${region.color}20`,
+            backgroundColor: `${region.color}15`,
             border: `1px solid ${region.color}`,
             color: region.color,
           }}
           whileHover={{
             backgroundColor: region.color,
             color: '#0a0a1a',
+            boxShadow: `0 10px 30px ${region.color}40`,
           }}
           whileTap={{ scale: 0.98 }}
         >
@@ -132,35 +146,48 @@ const BrainExplorer = () => {
   };
 
   return (
-    <section id="explorer" className="min-h-screen py-20 px-4 relative">
+    <section id="explorer" className="section-padding relative">
       {/* Background */}
-      <div className="absolute inset-0 neural-bg opacity-50" />
+      <div className="absolute inset-0 neural-bg" />
+      <div className="absolute inset-0 grid-bg opacity-50" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <motion.span
+            className="text-xs font-semibold uppercase tracking-widest mb-4 block"
+            style={{ color: '#8B5CF6' }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Interactive Experience
+          </motion.span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="text-white">Explore My </span>
-            <span className="text-glow-purple text-soft-purple">Brain</span>
+            <span className="text-gradient-purple">Brain</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
             Click on different regions to dive into specific knowledge domains.
             Each area represents years of learning, experiences, and frameworks.
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row items-center gap-12">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Interactive brain */}
           <motion.div
             className="flex-1 flex justify-center"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
             <BrainVisualization
               interactive={true}
@@ -172,52 +199,62 @@ const BrainExplorer = () => {
           {/* Region list */}
           <motion.div
             className="flex-1 max-w-md w-full"
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h3 className="text-xl font-semibold mb-6 text-gray-300">
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-6">
               Knowledge Domains
             </h3>
             <div className="space-y-3">
               {brainRegions.map((region, index) => (
                 <motion.button
                   key={region.id}
-                  className="w-full p-4 rounded-xl text-left transition-all group"
+                  className="w-full p-5 rounded-xl text-left transition-all group glass-card glass-card-hover"
                   style={{
-                    backgroundColor: activeRegionId === region.id ? `${region.color}20` : 'rgba(26, 26, 58, 0.5)',
-                    border: `1px solid ${activeRegionId === region.id ? region.color : 'rgba(255,255,255,0.1)'}`,
+                    backgroundColor: activeRegionId === region.id ? `${region.color}10` : undefined,
+                    borderColor: activeRegionId === region.id ? region.color : undefined,
                   }}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{
-                    backgroundColor: `${region.color}20`,
-                    borderColor: region.color,
-                  }}
                   onMouseEnter={() => setActiveRegionId(region.id)}
                   onMouseLeave={() => setActiveRegionId(null)}
                   onClick={() => setSelectedRegion(region)}
                 >
                   <div className="flex items-center gap-4">
-                    <div
-                      className="w-4 h-4 rounded-full transition-all group-hover:scale-125"
+                    <motion.div
+                      className="w-3 h-3 rounded-full flex-shrink-0"
                       style={{
                         backgroundColor: region.color,
-                        boxShadow: `0 0 10px ${region.color}`,
+                        boxShadow: `0 0 15px ${region.color}`,
                       }}
+                      animate={activeRegionId === region.id ? {
+                        scale: [1, 1.3, 1],
+                      } : {}}
+                      transition={{ duration: 1, repeat: Infinity }}
                     />
-                    <div>
-                      <h4 className="font-semibold text-white group-hover:text-electric-blue transition-colors">
+                    <div className="flex-1 min-w-0">
+                      <h4
+                        className="font-semibold text-white transition-colors"
+                        style={{
+                          color: activeRegionId === region.id ? region.color : 'white',
+                        }}
+                      >
                         {region.name}
                       </h4>
-                      <p className="text-sm text-gray-500 line-clamp-1">
+                      <p className="text-sm text-gray-500 truncate mt-0.5">
                         {region.description}
                       </p>
                     </div>
                     <svg
-                      className="w-5 h-5 text-gray-500 group-hover:text-white ml-auto transition-all group-hover:translate-x-1"
+                      className="w-5 h-5 text-gray-600 flex-shrink-0 transition-all"
+                      style={{
+                        color: activeRegionId === region.id ? region.color : undefined,
+                        transform: activeRegionId === region.id ? 'translateX(4px)' : 'translateX(0)',
+                      }}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
