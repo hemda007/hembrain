@@ -2,8 +2,49 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { scenarios } from '../data';
 
+const decisionTypes = [
+  {
+    id: 'career',
+    icon: '🎯',
+    title: 'Career Decisions',
+    description: 'Job offers, promotions, career pivots',
+    examples: ['Should I take this new job?', 'Is it time to switch careers?', 'How do I negotiate salary?'],
+    color: 'var(--accent-green)'
+  },
+  {
+    id: 'business',
+    icon: '📊',
+    title: 'Business Decisions',
+    description: 'Strategy, growth, partnerships',
+    examples: ['Should I start this side project?', 'How to prioritize features?', 'When to hire?'],
+    color: 'var(--accent-purple)'
+  },
+  {
+    id: 'life',
+    icon: '🧭',
+    title: 'Life Decisions',
+    description: 'Relationships, lifestyle, purpose',
+    examples: ['Should I relocate?', 'How to balance work-life?', 'What skills to learn?'],
+    color: 'var(--accent-cyan)'
+  }
+];
+
 const Scenarios = () => {
   const [selectedScenario, setSelectedScenario] = useState(null);
+  const [decisionInput, setDecisionInput] = useState('');
+  const [selectedType, setSelectedType] = useState(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const handleDecisionSubmit = (e) => {
+    e.preventDefault();
+    if (decisionInput.trim()) {
+      setIsAnalyzing(true);
+      // Simulate analysis
+      setTimeout(() => {
+        setIsAnalyzing(false);
+      }, 2000);
+    }
+  };
 
   return (
     <section id="scenarios" className="section">
@@ -87,6 +128,212 @@ const Scenarios = () => {
             </motion.button>
           ))}
         </div>
+
+        {/* Help Me in Decision Making Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{
+            marginTop: '80px',
+            padding: '48px',
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-xl)'
+          }}
+        >
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <motion.div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '16px',
+                background: 'linear-gradient(135deg, var(--accent-purple)20, var(--accent-cyan)20)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px',
+                fontSize: '1.5rem'
+              }}
+            >
+              🧠
+            </motion.div>
+            <h3 style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              marginBottom: '12px'
+            }}>
+              Help me in decision making
+            </h3>
+            <p style={{
+              fontSize: '0.9375rem',
+              color: 'var(--text-secondary)',
+              maxWidth: '500px',
+              margin: '0 auto',
+              lineHeight: '1.7'
+            }}>
+              Facing a tough choice? Let my brain analyze your situation and provide
+              a framework for clarity.
+            </p>
+          </div>
+
+          {/* Decision Types */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '16px',
+            marginBottom: '32px'
+          }}>
+            {decisionTypes.map((type) => (
+              <motion.button
+                key={type.id}
+                onClick={() => setSelectedType(selectedType === type.id ? null : type.id)}
+                style={{
+                  padding: '20px',
+                  background: selectedType === type.id ? `${type.color}10` : 'var(--bg-secondary)',
+                  border: `1px solid ${selectedType === type.id ? type.color : 'var(--border-subtle)'}`,
+                  borderRadius: 'var(--radius-lg)',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'all 0.2s ease'
+                }}
+                whileHover={{ y: -2 }}
+              >
+                <span style={{ fontSize: '1.5rem', marginBottom: '12px', display: 'block' }}>
+                  {type.icon}
+                </span>
+                <h4 style={{
+                  fontSize: '0.9375rem',
+                  fontWeight: '600',
+                  marginBottom: '6px',
+                  color: selectedType === type.id ? type.color : 'var(--text-primary)'
+                }}>
+                  {type.title}
+                </h4>
+                <p style={{
+                  fontSize: '0.8125rem',
+                  color: 'var(--text-tertiary)',
+                  lineHeight: '1.5'
+                }}>
+                  {type.description}
+                </p>
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Example Questions */}
+          {selectedType && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              style={{ marginBottom: '24px' }}
+            >
+              <p style={{
+                fontSize: '0.75rem',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                color: 'var(--text-tertiary)',
+                marginBottom: '12px'
+              }}>
+                Example questions
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {decisionTypes.find(t => t.id === selectedType)?.examples.map((example) => (
+                  <button
+                    key={example}
+                    onClick={() => setDecisionInput(example)}
+                    style={{
+                      padding: '8px 14px',
+                      fontSize: '0.8125rem',
+                      background: 'var(--bg-tertiary)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '100px',
+                      color: 'var(--text-secondary)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    {example}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Decision Input */}
+          <form onSubmit={handleDecisionSubmit}>
+            <div style={{ position: 'relative' }}>
+              <textarea
+                value={decisionInput}
+                onChange={(e) => setDecisionInput(e.target.value)}
+                placeholder="Describe your decision or challenge..."
+                className="input"
+                style={{
+                  width: '100%',
+                  minHeight: '120px',
+                  resize: 'vertical',
+                  paddingRight: '120px'
+                }}
+              />
+              <motion.button
+                type="submit"
+                className="btn btn-primary"
+                disabled={!decisionInput.trim() || isAnalyzing}
+                style={{
+                  position: 'absolute',
+                  bottom: '12px',
+                  right: '12px'
+                }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isAnalyzing ? (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <motion.span
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                      style={{ display: 'inline-block' }}
+                    >
+                      ⚡
+                    </motion.span>
+                    Analyzing
+                  </span>
+                ) : (
+                  'Analyze'
+                )}
+              </motion.button>
+            </div>
+          </form>
+
+          {/* Analysis Result */}
+          {isAnalyzing && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                marginTop: '24px',
+                padding: '24px',
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 'var(--radius-lg)'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: 'var(--accent-purple)',
+                  animation: 'pulse 1.5s infinite'
+                }} />
+                <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                  Syncing with brain patterns...
+                </span>
+              </div>
+            </motion.div>
+          )}
+        </motion.div>
       </div>
 
       {/* Modal */}
