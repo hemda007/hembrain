@@ -61,11 +61,11 @@ const AskMeAnything = () => {
   };
 
   return (
-    <section id="ask" className="section-padding relative">
+    <section id="ask" className="section relative">
       <div className="absolute inset-0 neural-bg" />
       <div className="absolute inset-0 grid-bg opacity-30" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="container relative z-10" style={{ maxWidth: '900px' }}>
         {/* Section header */}
         <motion.div
           className="text-center mb-16"
@@ -74,21 +74,12 @@ const AskMeAnything = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.span
-            className="text-xs font-semibold uppercase tracking-widest mb-4 block"
-            style={{ color: '#00D4FF' }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            AI Chat Interface
-          </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-white">Ask Me </span>
+          <span className="section-label" style={{ color: '#00D4FF' }}>AI Chat Interface</span>
+          <h2 className="section-title">
+            <span style={{ color: 'white' }}>Ask Me </span>
             <span className="text-gradient-blue">Anything</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="section-description" style={{ margin: '0 auto' }}>
             Chat with an AI version of me, trained on my mental models and frameworks.
           </p>
         </motion.div>
