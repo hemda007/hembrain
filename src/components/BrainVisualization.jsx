@@ -14,15 +14,15 @@ const BrainVisualization = ({ onRegionClick, interactive = false, size = 'large'
 
   const regions = [
     {
-      id: 'philosophy',
-      name: 'Philosophy & Mental Models',
+      id: 'work-culture',
+      name: 'Work Culture',
       color: '#8B5CF6',
       glowColor: 'rgba(139, 92, 246, 0.6)',
       path: 'M250,85 C200,70 160,90 150,130 C140,170 165,195 210,195 C240,195 270,195 300,195 C345,195 365,170 355,130 C345,90 305,70 250,85',
     },
     {
-      id: 'ai-data',
-      name: 'AI & Data Analytics',
+      id: 'data-analytics',
+      name: 'Data & Analytics',
       color: '#00D4FF',
       glowColor: 'rgba(0, 212, 255, 0.6)',
       path: 'M95,220 C65,200 50,240 60,290 C70,340 95,380 140,395 C175,408 195,385 195,345 C195,305 175,265 150,235 C125,205 95,220 95,220',
@@ -35,15 +35,15 @@ const BrainVisualization = ({ onRegionClick, interactive = false, size = 'large'
       path: 'M250,55 C215,35 175,50 165,75 C155,100 180,120 225,130 C270,140 310,125 320,100 C330,75 295,40 260,40 C250,40 250,55 250,55',
     },
     {
-      id: 'cinema',
-      name: 'Cinema & Culture',
+      id: 'philosophy',
+      name: 'Life Philosophy',
       color: '#FF6B9D',
       glowColor: 'rgba(255, 107, 157, 0.6)',
       path: 'M405,220 C435,200 450,240 440,290 C430,340 405,380 360,395 C325,408 305,385 305,345 C305,305 325,265 350,235 C375,205 405,220 405,220',
     },
     {
       id: 'leadership',
-      name: 'Leadership & Teams',
+      name: 'Leadership & Business',
       color: '#F59E0B',
       glowColor: 'rgba(245, 158, 11, 0.6)',
       path: 'M200,215 C175,240 175,300 200,340 C225,380 275,380 300,340 C325,300 325,240 300,215 C275,190 225,190 200,215',
