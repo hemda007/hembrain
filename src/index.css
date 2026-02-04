@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-neural-pink: #FF6B9D;
+  --color-electric-blue: #00D4FF;
+  --color-soft-purple: #8B5CF6;
+  --color-dark-bg: #0a0a1a;
+  --color-dark-surface: #12122a;
+  --color-dark-card: #1a1a3a;
+
+  --font-family-space: 'Space Grotesk', system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-space);
+  background-color: var(--color-dark-bg);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-soft-purple);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neural-pink);
+}
+
+/* Glow effects */
+.glow-pink {
+  box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+/* Text glow */
+.text-glow-pink {
+  text-shadow: 0 0 20px rgba(255, 107, 157, 0.7);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.7);
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.7);
+}
+
+/* Neural network background pattern */
+.neural-bg {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(255, 107, 157, 0.1) 0%, transparent 50%);
+}
