@@ -5,10 +5,11 @@ const AskMeAnything = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const suggestedQuestions = [
-    "How do you evaluate if someone is job-ready?",
-    "What's your take on work-life balance?",
-    "How did you build Codebasics profitably?",
-    "What mental models do you use daily?",
+    "How do you know when it's time to quit a job?",
+    "What's the biggest career mistake you've made?",
+    "How do you make decisions when you don't have enough data?",
+    "What would you tell your 25-year-old self?",
+    "How do you deal with imposter syndrome as a leader?",
   ];
 
   const handleSubmit = (e) => {
@@ -20,10 +21,11 @@ const AskMeAnything = () => {
     <section id="ask" className="section">
       <div className="container ask-wrap">
         <div className="section-header">
-          <span className="section-label">AI Chat</span>
-          <h2 className="heading-lg section-title">Ask me anything</h2>
+          <span className="section-label">Your Question. My 30 Years.</span>
+          <h2 className="heading-lg section-title">Ask my brain</h2>
           <p className="section-description">
-            Chat with an AI trained on my mental models, frameworks, and 634 LinkedIn posts.
+            Not a search engine. Not a chatbot trained on Reddit. You're querying a real mind —
+            with real biases, real blind spots, and real experience.
           </p>
         </div>
 
@@ -33,7 +35,7 @@ const AskMeAnything = () => {
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Type your question..."
+                placeholder="Ask about career decisions, leadership, data analytics, life frameworks, or anything you'd DM me on LinkedIn..."
                 className="input ask-input"
               />
 
@@ -55,20 +57,18 @@ const AskMeAnything = () => {
                 style={{ opacity: question.trim() ? 1 : 0.5 }}
               >
                 Ask Question
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M4 8h8m-4-4l4 4-4 4" />
-                </svg>
               </button>
             </form>
           ) : (
             <div className="ask-success">
-              <div className="success-icon">
-                <svg width="24" height="24" fill="none" stroke="var(--accent-green)" strokeWidth="2">
-                  <path d="M5 12l5 5L20 7" />
-                </svg>
+              <div className="response-header">
+                <span className="response-badge">Hem's Brain responding...</span>
+                <span className="response-meta">Drawing from: Career × Philosophy</span>
               </div>
-              <h3>Question Received</h3>
-              <p>In the full version, you'll get an AI-powered response based on my frameworks.</p>
+              <p className="response-note">
+                In the full version, you'll get a response based on my actual frameworks and lived experience.
+                Sometimes the answer is "I don't know." That's how you know it's human.
+              </p>
               <button onClick={() => { setIsSubmitted(false); setQuestion(''); }} className="btn btn-secondary">
                 Ask Another Question
               </button>
@@ -130,24 +130,24 @@ const AskMeAnything = () => {
           text-align: center;
           padding: 20px 0;
         }
-        .success-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background: rgba(34, 197, 94, 0.1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 16px;
+        .response-header {
+          margin-bottom: 16px;
         }
-        .ask-success h3 {
-          font-size: 1.125rem;
-          font-weight: 600;
-          margin-bottom: 8px;
-        }
-        .ask-success p {
+        .response-badge {
+          display: block;
           font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: 4px;
+        }
+        .response-meta {
+          font-size: 0.75rem;
+          color: var(--text-tertiary);
+        }
+        .response-note {
+          font-size: 0.9375rem;
           color: var(--text-secondary);
+          line-height: 1.6;
           margin-bottom: 20px;
         }
       `}</style>

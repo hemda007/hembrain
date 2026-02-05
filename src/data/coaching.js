@@ -1,32 +1,34 @@
 export const coachingPlans = [
   {
-    id: 'ai-coaching',
-    name: '7-Day AI Coaching',
-    price: 'Free Beta',
-    description: 'Daily check-ins powered by my frameworks and mental models.',
+    id: 'quick-sync',
+    name: 'Quick Sync',
+    subtitle: 'One focused week for one specific challenge',
+    price: '$49',
+    description: 'When you need clarity, not a long-term commitment.',
     features: [
-      'Daily personalized prompts',
-      'Progress tracking dashboard',
-      'Access to mental model library',
-      'Async voice note responses'
+      'Focused on one specific decision or challenge',
+      'Frameworks mapped to YOUR situation',
+      'Async responses within 24 hours',
+      'Clarity by end of week'
     ],
-    cta: 'Start Free Trial',
+    cta: 'Start Quick Sync',
     highlighted: false,
     color: '#00D4FF'
   },
   {
-    id: 'live-coaching',
-    name: '10-Day + Live Session',
-    price: 'Coming Soon',
-    description: 'Everything in AI Coaching plus one live 1:1 video call.',
+    id: 'deep-sync',
+    name: 'Deep Sync',
+    subtitle: 'Two weeks of sustained thinking partnership',
+    price: '$89',
+    description: 'For decisions that deserve more than a gut feeling.',
     features: [
-      'Everything in 7-Day AI Coaching',
-      '1:1 live video session (45 min)',
+      'Everything in Quick Sync',
+      'Deeper context and follow-ups',
+      'Multiple interconnected challenges',
       'Custom action plan',
-      'Priority response time',
-      '30-day follow-up check-in'
+      'Priority response time'
     ],
-    cta: 'Join Waitlist',
+    cta: 'Start Deep Sync',
     highlighted: true,
     color: '#8B5CF6'
   }

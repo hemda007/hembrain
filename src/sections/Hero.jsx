@@ -3,38 +3,44 @@ const Hero = ({ onEnterBrain }) => {
     <section className="hero">
       <div className="container">
         <div className="hero-content">
+          <span className="hero-badge">Real brain. Real frameworks. Real consequences.</span>
+
           <h1 className="hero-title">
-            Enter my mind.
+            You've read my posts.
             <br />
-            <span className="text-gradient">Think with me.</span>
+            <span className="text-gradient">Now enter my mind.</span>
           </h1>
 
           <p className="hero-desc">
-            Mental models, career frameworks, and life philosophy
-            from real experience.
+            634 posts only scratched the surface. Inside HemBrain, you get the
+            frameworks behind the frameworks — the actual thinking patterns I use
+            when facing career decisions, building businesses, and navigating life.
+            Not theory. Lived experience.
           </p>
 
           <div className="hero-cta">
             <button className="btn btn-primary" onClick={onEnterBrain}>
-              Explore My Brain
+              Enter My Brain
             </button>
             <a href="#scenarios" className="btn btn-secondary">
-              View Scenarios
+              See How It Works
             </a>
           </div>
 
+          <p className="hero-micro">No signup needed. Just curiosity.</p>
+
           <div className="hero-stats">
             <div className="stat">
+              <span className="stat-value">30+</span>
+              <span className="stat-label">Years of hard-won experience</span>
+            </div>
+            <div className="stat">
               <span className="stat-value">50+</span>
-              <span className="stat-label">Mental Models</span>
+              <span className="stat-label">Frameworks from real decisions</span>
             </div>
             <div className="stat">
               <span className="stat-value">634</span>
-              <span className="stat-label">LinkedIn Posts</span>
-            </div>
-            <div className="stat">
-              <span className="stat-value">100K+</span>
-              <span className="stat-label">Reactions</span>
+              <span className="stat-label">Posts distilled into this</span>
             </div>
           </div>
         </div>
@@ -48,30 +54,44 @@ const Hero = ({ onEnterBrain }) => {
           padding: 120px 0 80px;
         }
         .hero-content {
-          max-width: 600px;
+          max-width: 640px;
+        }
+        .hero-badge {
+          display: inline-block;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--accent-purple);
+          margin-bottom: 24px;
+          letter-spacing: 0.02em;
         }
         .hero-title {
-          font-size: clamp(2.5rem, 7vw, 3.5rem);
+          font-size: clamp(2.25rem, 6vw, 3.25rem);
           font-weight: 700;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
+          line-height: 1.15;
+          letter-spacing: -0.02em;
           margin-bottom: 24px;
         }
         .hero-desc {
-          font-size: 1.125rem;
+          font-size: 1.0625rem;
           color: var(--text-secondary);
-          line-height: 1.6;
-          margin-bottom: 40px;
-          max-width: 440px;
+          line-height: 1.7;
+          margin-bottom: 32px;
         }
         .hero-cta {
           display: flex;
           gap: 12px;
-          margin-bottom: 80px;
+          margin-bottom: 16px;
+        }
+        .hero-micro {
+          font-size: 0.8125rem;
+          color: var(--text-tertiary);
+          margin-bottom: 64px;
         }
         .hero-stats {
           display: flex;
-          gap: 48px;
+          gap: 40px;
+          padding-top: 32px;
+          border-top: 1px solid var(--border-subtle);
         }
         .stat-value {
           display: block;
@@ -80,8 +100,9 @@ const Hero = ({ onEnterBrain }) => {
           margin-bottom: 4px;
         }
         .stat-label {
-          font-size: 0.8125rem;
+          font-size: 0.75rem;
           color: var(--text-tertiary);
+          line-height: 1.4;
         }
         @media (max-width: 640px) {
           .hero {
@@ -89,13 +110,13 @@ const Hero = ({ onEnterBrain }) => {
           }
           .hero-cta {
             flex-direction: column;
-            margin-bottom: 60px;
           }
           .hero-stats {
-            gap: 32px;
+            flex-wrap: wrap;
+            gap: 24px;
           }
-          .stat-value {
-            font-size: 1.25rem;
+          .stat {
+            min-width: 140px;
           }
         }
       `}</style>
