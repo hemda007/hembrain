@@ -1,7 +1,6 @@
 const Footer = () => {
-  const year = new Date().getFullYear();
   const links = [
-    { label: 'Explore', href: '#explorer' },
+    { label: 'Explore Brain', href: '#explorer' },
     { label: 'Ask Me', href: '#ask' },
     { label: 'Scenarios', href: '#scenarios' },
     { label: 'Coaching', href: '#coaching' },
@@ -17,7 +16,11 @@ const Footer = () => {
         <div className="foot-top">
           <div className="foot-brand">
             <a href="#" className="foot-logo">HemBrain</a>
-            <p className="foot-desc">An interactive mind interface for navigating career, analytics, and life decisions.</p>
+            <p className="foot-tagline">Human Intelligence, Amplified</p>
+            <p className="foot-desc">
+              Not artificial intelligence. Amplified human intelligence.
+              Real brain. Real frameworks. Real consequences.
+            </p>
           </div>
           <div className="foot-cols">
             <div className="foot-col">
@@ -32,8 +35,8 @@ const Footer = () => {
         </div>
         <div className="divider" />
         <div className="foot-bottom">
-          <p>© {year} HemBrain. Built with mental models.</p>
-          <div className="foot-status"><span className="status-dot" />Mind syncing</div>
+          <p>Built by a human brain. Enhanced by technology. Never the other way around.</p>
+          <div className="foot-status"><span className="status-dot" />Brain Active</div>
         </div>
       </div>
 
@@ -51,16 +54,21 @@ const Footer = () => {
         @media (min-width: 768px) {
           .foot-top { flex-direction: row; justify-content: space-between; }
         }
-        .foot-brand { max-width: 260px; }
+        .foot-brand { max-width: 300px; }
         .foot-logo {
           font-size: 1.125rem;
           font-weight: 700;
           color: var(--text-primary);
           text-decoration: none;
           display: block;
-          margin-bottom: 10px;
+          margin-bottom: 4px;
         }
-        .foot-desc { font-size: 0.8125rem; color: var(--text-tertiary); line-height: 1.5; }
+        .foot-tagline {
+          font-size: 0.75rem;
+          color: var(--accent-purple);
+          margin-bottom: 12px;
+        }
+        .foot-desc { font-size: 0.8125rem; color: var(--text-tertiary); line-height: 1.6; }
         .foot-cols { display: flex; gap: 40px; }
         .foot-col .label { display: block; margin-bottom: 12px; }
         .label { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); }

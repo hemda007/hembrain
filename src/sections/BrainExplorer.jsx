@@ -32,11 +32,11 @@ const BrainExplorer = () => {
     <section id="explorer" className="section">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">Knowledge Domains</span>
-          <h2 className="heading-lg section-title">Explore my brain</h2>
+          <span className="section-label">The Architecture of How I Think</span>
+          <h2 className="heading-lg section-title">What's inside</h2>
           <p className="section-description">
-            Each region represents years of learning, experiences, and frameworks.
-            Click any region to dive deeper.
+            Every brain has regions. Mine have been shaped by decades of making decisions —
+            some I'm proud of, some I'd take back. Click any region to see the frameworks that survived real life.
           </p>
         </div>
 

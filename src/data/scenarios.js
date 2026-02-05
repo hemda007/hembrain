@@ -1,92 +1,98 @@
 export const scenarios = [
   {
     id: 1,
-    title: "I'm a fresher with no work experience",
-    icon: "🎓",
+    title: "The Golden Handcuffs",
+    description: "Great salary. Soul-crushing work. When do you walk away from security for sanity?",
     category: "Career",
-    description: "Build proof of work that gets you hired without traditional experience.",
+    difficulty: "Hard",
+    lived: true,
     color: "#10B981",
     framework: [
-      "Build a strong portfolio on GitHub/LinkedIn",
-      "Show continuous learning activity (last 3-6 months)",
-      "Work on real projects, not just tutorials",
-      "Communicate your learnings clearly",
-      "Demonstrate attitude to learn & contribute"
+      "Calculate your 'enough' number — what do you actually need?",
+      "List what you're trading: time, health, relationships, growth",
+      "Set a deadline — if nothing changes by X date, leave",
+      "Build runway before you leap (6 months minimum)",
+      "Remember: golden handcuffs are still handcuffs"
     ]
   },
   {
     id: 2,
-    title: "My workplace has toxic 'show hours' culture",
-    icon: "⏰",
-    category: "Work Culture",
-    description: "Navigate environments that value face-time over actual productivity.",
-    color: "#8B5CF6",
+    title: "The Loyal Underperformer",
+    description: "They've been with you since day one. They're also holding the team back. What do you do?",
+    category: "Leadership",
+    difficulty: "Painful",
+    lived: true,
+    color: "#F59E0B",
     framework: [
-      "Focus on delivering results, not hours logged",
-      "Document your work and achievements",
-      "Have direct conversations about expectations",
-      "Consider if the culture is worth staying for",
-      "Build skills to have options if needed"
+      "Separate loyalty from performance — they're not the same",
+      "Have the honest conversation you've been avoiding",
+      "Give clear expectations and a real timeline",
+      "Explore role changes before exits",
+      "Act on what's fair to the team, not just the individual"
     ]
   },
   {
     id: 3,
-    title: "Should I learn Excel or jump to Power BI?",
-    icon: "📊",
-    category: "Data Analytics",
-    description: "Navigate the analytics tools landscape strategically.",
-    color: "#00D4FF",
+    title: "The Shiny Object",
+    description: "New opportunity looks amazing. Current path is working. Is switching brave or just impulsive?",
+    category: "Career",
+    difficulty: "Medium",
+    lived: true,
+    color: "#8B5CF6",
     framework: [
-      "Excel is still the gateway - master fundamentals first",
-      "SQL is the key member of the analytics family",
-      "Power BI helps you succeed in modern environments",
-      "Don't skip basics chasing trendy tools",
-      "Build T-shaped skills: deep + broad"
+      "Ask: Am I running toward something or away from something?",
+      "Write down what you'll lose, not just what you'll gain",
+      "Talk to someone who left a similar 'good thing'",
+      "Give it 2 weeks before deciding — urgency is often manufactured",
+      "If you'd regret not trying more than failing, go"
     ]
   },
   {
     id: 4,
-    title: "I have a career break on my resume",
-    icon: "🔄",
+    title: "The Expertise Trap",
+    description: "You're the best at what you do. But what you do is becoming irrelevant. Do you double down or start over?",
     category: "Career",
-    description: "Return to the workforce with confidence and proof of recent learning.",
-    color: "#FF6B9D",
+    difficulty: "Existential",
+    lived: true,
+    color: "#00D4FF",
     framework: [
-      "Show recent learning activity (last 3-6 months)",
-      "Build portfolio projects during your break",
-      "Be honest about your break - it's not a weakness",
-      "Demonstrate continuous learning mindset",
-      "Apply to companies that value potential over pedigree"
+      "Acknowledge the grief — letting go of mastery is real loss",
+      "Identify transferable skills (they're more than you think)",
+      "Start the new thing while you're still good at the old thing",
+      "Be a beginner again — your ego will hate it, do it anyway",
+      "Relevance > excellence in a dying field"
     ]
   },
   {
     id: 5,
-    title: "I'm jobless and the market looks bad",
-    icon: "😰",
-    category: "Career",
-    description: "Navigate job market downturns without losing hope.",
-    color: "#F59E0B",
+    title: "The Advice Paradox",
+    description: "Everyone's telling you different things. Your gut says something else entirely. Who do you listen to?",
+    category: "Philosophy",
+    difficulty: "Ongoing",
+    lived: true,
+    color: "#FF6B9D",
     framework: [
-      "Don't blindly follow the crowd mentality",
-      "Recession is part of a cycle - it will pass",
-      "Identify skill gaps and work on them",
-      "Stand out by building visible proof of work",
-      "Use this time to learn what others aren't"
+      "Consider whose advice comes from lived experience vs theory",
+      "Check if advisors have skin in your game or just opinions",
+      "Your gut is data too — it's processing things you can't articulate",
+      "Ask: 'What would I do if no one was watching?'",
+      "You'll live with the consequences, not them — act accordingly"
     ]
   },
   {
     id: 6,
-    title: "Should I take a 'masterclass' to upskill?",
-    icon: "🎯",
-    category: "Learning",
-    description: "Navigate the ed-tech landscape without falling for gimmicks.",
-    color: "#6366F1",
+    title: "The Toxic Culture Question",
+    description: "The money is good but the culture is killing you slowly. How long do you stay?",
+    category: "Work Culture",
+    difficulty: "Hard",
+    lived: true,
+    color: "#8B5CF6",
     framework: [
-      "Beware of 'become top 1%' claims",
-      "Check if 80% content is free to evaluate quality",
-      "Look for real proof of student outcomes",
-      "Avoid platforms with aggressive sales tactics",
-      "Quality free content often beats paid gimmicks"
+      "Document the impact — health, relationships, energy levels",
+      "Calculate the true cost (not just lost salary if you leave)",
+      "Test if change is possible — raise issues once, clearly",
+      "Build skills and connections that travel with you",
+      "Set a hard exit date and honor it"
     ]
   }
 ];

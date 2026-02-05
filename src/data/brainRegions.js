@@ -2,20 +2,18 @@ export const brainRegions = [
   {
     id: 'career',
     name: 'Career Navigation',
-    area: 'prefrontal',
     color: '#10B981',
-    description: 'Strategic career moves, hiring insights, and building proof of work that gets you noticed.',
+    description: 'The graveyard of bad advice I ignored, and the handful of principles that actually worked. Two decades of hiring, firing, pivoting, and learning that your career is not a ladder — it\'s a climbing wall, and you get to pick your own holds.',
     topics: [
-      'Hiring Freshers',
+      'Hiring Decisions',
       'Portfolio Building',
-      'Resume Optimization',
+      'Career Pivots',
       'Standing Out',
       'Career Breaks',
-      'Job Search Strategy',
+      'Job Market Strategy',
       'Proof of Work',
-      'Interview Prep'
+      'Hard Conversations'
     ],
-    position: { x: 50, y: 15 },
     insights: [
       {
         title: 'The 5 Qualities I Look For',
@@ -24,7 +22,7 @@ export const brainRegions = [
       },
       {
         title: 'Freshers Are Top Performers',
-        content: '65% of Codebasics talents are freshers or people with career breaks. Majority are our top performers!',
+        content: '65% of Codebasics talents are freshers or people with career breaks. Majority are our top performers.',
         engagement: '31.8K'
       },
       {
@@ -37,24 +35,22 @@ export const brainRegions = [
   {
     id: 'data-analytics',
     name: 'Data & Analytics',
-    area: 'left-temporal',
     color: '#00D4FF',
-    description: 'From Excel fundamentals to modern BI tools - practical data analytics wisdom from the trenches.',
+    description: 'Data doesn\'t lie, but it absolutely misleads. How to think about numbers without drowning in them. The mental models I use to separate signal from noise — whether you\'re building a dashboard or deciding if a business idea is worth pursuing.',
     topics: [
       'Excel Mastery',
-      'Power BI',
       'SQL Fundamentals',
-      'Dashboard Design',
+      'Power BI',
       'Data Storytelling',
+      'Signal vs Noise',
+      'Dashboard Design',
       'Stakeholder Trust',
-      'Report Best Practices',
       'Business Intelligence'
     ],
-    position: { x: 20, y: 50 },
     insights: [
       {
         title: 'Excel is the Gateway',
-        content: 'Most business users are still with Excel and it\'s not a bad thing - Excel should be seen as a gateway to modern analytics.',
+        content: 'Most business users are still with Excel and it\'s not a bad thing. Excel should be seen as a gateway to modern analytics.',
         engagement: '11.1K'
       },
       {
@@ -63,33 +59,31 @@ export const brainRegions = [
         engagement: '7.1K'
       },
       {
-        title: 'The Analytics Wedding',
-        content: 'If I marry Data Analytics: Excel is the eldest family member, SQL is the key member, Power BI is the close friend who helps succeed.',
+        title: 'Data Literacy Reality',
+        content: 'Data literacy isn\'t about SQL. It\'s about knowing which question to ask before you open the spreadsheet.',
         engagement: '3K'
       }
     ]
   },
   {
     id: 'work-culture',
-    name: 'Work Culture',
-    area: 'frontal',
+    name: 'Work Culture & Teams',
     color: '#8B5CF6',
-    description: 'Focus hours over face time, German efficiency meets Indian hustle, and building healthy workplaces.',
+    description: 'Managing 20+ people taught me one thing: culture isn\'t what you say, it\'s what you tolerate. Frameworks for building teams that don\'t need you to babysit them, having hard conversations without being a jerk, and creating environments where good people actually want to stay.',
     topics: [
-      'Focus Blocks',
+      'Focus Hours',
       'No Timesheets',
       'Results Over Hours',
-      'Work-Life Balance',
+      'Hard Conversations',
       'Toxic Managers',
-      'Remote Work',
-      'Deep Work',
-      'Productivity'
+      'Remote Culture',
+      'Team Trust',
+      'Deep Work'
     ],
-    position: { x: 50, y: 25 },
     insights: [
       {
         title: 'Show Hours vs Focus Hours',
-        content: 'First job in India: Couldn\'t leave before 7pm even with no work. First job in Germany: Got warning for staying late - "Are you not able to focus?"',
+        content: 'First job in India: Couldn\'t leave before 7pm even with no work. First job in Germany: Got warning for staying late — "Are you not able to focus?"',
         engagement: '25.9K'
       },
       {
@@ -99,7 +93,7 @@ export const brainRegions = [
       },
       {
         title: 'The Real Cancer',
-        content: 'Toxic managers who enjoy control by making people work long hours - these people are the real cancer in workplaces.',
+        content: 'Toxic managers who enjoy control by making people work long hours — these people are the real cancer in workplaces.',
         engagement: '25.9K'
       }
     ]
@@ -107,20 +101,18 @@ export const brainRegions = [
   {
     id: 'leadership',
     name: 'Leadership & Business',
-    area: 'central',
     color: '#F59E0B',
-    description: 'Building profitable companies without gimmicks, leading teams with trust, and ethical business practices.',
+    description: 'I built Codebasics without VC money, fancy offices, or a business degree. Everything I know about growing something from zero with limited resources, making decisions when the data is incomplete, and leading when you\'re not sure where you\'re going.',
     topics: [
+      'Bootstrapping',
       'Ethical Business',
       'Team Building',
-      'Profitability',
       'No-Gimmick Growth',
       'Content Quality',
       'Community First',
-      'Bootstrapping',
-      'Sustainable Growth'
+      'Sustainable Growth',
+      'Decision Making'
     ],
-    position: { x: 50, y: 55 },
     insights: [
       {
         title: 'Profitable Without Gimmicks',
@@ -129,7 +121,7 @@ export const brainRegions = [
       },
       {
         title: 'The Codebasics Way',
-        content: '4.1 Lakh+ learners. Only 10% paid. But YES, we are profitable. Not making millions but profitable - that\'s what matters.',
+        content: '4.1 Lakh+ learners. Only 10% paid. But YES, we are profitable. Not making millions but profitable — that\'s what matters.',
         engagement: '4.1K'
       },
       {
@@ -142,24 +134,22 @@ export const brainRegions = [
   {
     id: 'philosophy',
     name: 'Life Philosophy',
-    area: 'right-temporal',
     color: '#FF6B9D',
-    description: 'Mental models, continuous learning, and wisdom gained from failures and recoveries.',
+    description: 'The operating system underneath everything else. Stoicism meets street smarts. How I think about regret, ambition, relationships, and the uncomfortable truth that most "life advice" is just survivorship bias dressed up in motivational quotes.',
     topics: [
-      'Continuous Learning',
+      'Mental Models',
       'First Principles',
       'Resilience',
-      'Standing Out',
       'Unlearning',
       'Growth Mindset',
       'Legacy Building',
-      'Life Lessons'
+      'Regret Minimization',
+      'Hard Truths'
     ],
-    position: { x: 80, y: 50 },
     insights: [
       {
         title: 'You Die Twice',
-        content: 'First - when your mortal remains are gone. Second - the last time someone says your name. Build a legacy that outlives you.',
+        content: 'First — when your mortal remains are gone. Second — the last time someone says your name. Build a legacy that outlives you.',
         engagement: '5.5K'
       },
       {
@@ -168,8 +158,8 @@ export const brainRegions = [
         engagement: '2.4K'
       },
       {
-        title: 'Beyond the Crowd',
-        content: 'When everyone said "no jobs", I stopped listening. Recession is part of a cycle. Identify gaps and work on them.',
+        title: 'The Mentor Paradox',
+        content: 'I used to think I needed a mentor. Never found the perfect fit. Then I realized: the best mentorship is distributed. Stop looking for one guru.',
         engagement: '3.7K'
       }
     ]
