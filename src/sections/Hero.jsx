@@ -1,37 +1,22 @@
 const Hero = ({ onEnterBrain }) => {
-  const stats = [
-    { value: '50+', label: 'Mental Models' },
-    { value: '634', label: 'LinkedIn Posts' },
-    { value: '100K+', label: 'Reactions' },
-  ];
-
   return (
     <section className="hero">
       <div className="container">
-        <div className="hero-inner">
-          <span className="badge badge-accent">
-            <span className="badge-dot" />
-            Mind Interface Active
-          </span>
-
-          <h1 className="heading-xl">
-            Sync with my mind.
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Enter my mind.
             <br />
-            <span className="text-gradient">Explore how I think.</span>
+            <span className="text-gradient">Think with me.</span>
           </h1>
 
-          <p className="hero-desc text-muted">
-            Navigate career decisions, data analytics, and life philosophy through
-            mental models and frameworks that actually work. Built from real experience,
-            not theory.
+          <p className="hero-desc">
+            Mental models, career frameworks, and life philosophy
+            from real experience.
           </p>
 
           <div className="hero-cta">
             <button className="btn btn-primary" onClick={onEnterBrain}>
               Explore My Brain
-              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M4 8h8m-4-4l4 4-4 4" />
-              </svg>
             </button>
             <a href="#scenarios" className="btn btn-secondary">
               View Scenarios
@@ -39,12 +24,18 @@ const Hero = ({ onEnterBrain }) => {
           </div>
 
           <div className="hero-stats">
-            {stats.map((stat) => (
-              <div key={stat.label} className="stat">
-                <div className="stat-value">{stat.value}</div>
-                <div className="stat-label">{stat.label}</div>
-              </div>
-            ))}
+            <div className="stat">
+              <span className="stat-value">50+</span>
+              <span className="stat-label">Mental Models</span>
+            </div>
+            <div className="stat">
+              <span className="stat-value">634</span>
+              <span className="stat-label">LinkedIn Posts</span>
+            </div>
+            <div className="stat">
+              <span className="stat-value">100K+</span>
+              <span className="stat-label">Reactions</span>
+            </div>
           </div>
         </div>
       </div>
@@ -54,44 +45,37 @@ const Hero = ({ onEnterBrain }) => {
           min-height: 100vh;
           display: flex;
           align-items: center;
-          padding-top: 80px;
-          padding-bottom: 40px;
+          padding: 120px 0 80px;
         }
-        .hero-inner {
-          max-width: 720px;
+        .hero-content {
+          max-width: 600px;
         }
-        .badge-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--accent-green);
-        }
-        .hero .badge {
+        .hero-title {
+          font-size: clamp(2.5rem, 7vw, 3.5rem);
+          font-weight: 700;
+          line-height: 1.1;
+          letter-spacing: -0.03em;
           margin-bottom: 24px;
         }
-        .hero .heading-xl {
-          margin-bottom: 20px;
-        }
         .hero-desc {
-          font-size: 1.0625rem;
-          line-height: 1.7;
-          max-width: 540px;
-          margin-bottom: 32px;
+          font-size: 1.125rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          margin-bottom: 40px;
+          max-width: 440px;
         }
         .hero-cta {
           display: flex;
           gap: 12px;
-          flex-wrap: wrap;
-          margin-bottom: 64px;
+          margin-bottom: 80px;
         }
         .hero-stats {
           display: flex;
-          gap: 40px;
-          padding-top: 32px;
-          border-top: 1px solid var(--border-subtle);
+          gap: 48px;
         }
         .stat-value {
-          font-size: 1.75rem;
+          display: block;
+          font-size: 1.5rem;
           font-weight: 700;
           margin-bottom: 4px;
         }
@@ -100,11 +84,18 @@ const Hero = ({ onEnterBrain }) => {
           color: var(--text-tertiary);
         }
         @media (max-width: 640px) {
+          .hero {
+            padding: 100px 0 60px;
+          }
+          .hero-cta {
+            flex-direction: column;
+            margin-bottom: 60px;
+          }
           .hero-stats {
             gap: 32px;
           }
           .stat-value {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
           }
         }
       `}</style>
