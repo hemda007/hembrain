@@ -163,6 +163,138 @@ export const brainRegions = [
         engagement: '3.7K'
       }
     ]
+  },
+  {
+    id: 'integrity',
+    name: 'Integrity',
+    color: '#14b8a6',
+    description: 'The non-negotiables that define who you are when no one is watching. Ethics isn\'t about following rules — it\'s about having principles that survive pressure. The moments that tested mine, and the framework I use to make hard calls.',
+    topics: [
+      'Ethical Decisions',
+      'Honesty in Business',
+      'Transparency',
+      'Keeping Promises',
+      'Admitting Mistakes',
+      'Standing Your Ground',
+      'Trust Building',
+      'Values vs Profits'
+    ],
+    insights: [
+      {
+        title: 'No Fake Scarcity',
+        content: 'We never ran "only 10 seats left" or "price increases tomorrow" gimmicks. If the product is good, it doesn\'t need manufactured urgency.',
+        engagement: '4.2K'
+      },
+      {
+        title: 'Refunds Without Questions',
+        content: 'Someone asks for a refund? Give it. No interrogation. Trust is worth more than one transaction.',
+        engagement: '3.1K'
+      },
+      {
+        title: 'Admitting When Wrong',
+        content: 'The fastest way to build trust is admitting when you\'re wrong. It\'s uncomfortable but it compounds.',
+        engagement: '2.8K'
+      }
+    ]
+  },
+  {
+    id: 'discipline',
+    name: 'Discipline',
+    color: '#ef4444',
+    description: 'Motivation gets you started. Discipline keeps you going when motivation abandons you at 5am. The habits, systems, and mental tricks I use to stay consistent when everything in me wants to quit.',
+    topics: [
+      'Daily Routines',
+      'Habit Building',
+      'Focus Systems',
+      'Consistency',
+      'Delayed Gratification',
+      'Energy Management',
+      'Saying No',
+      'Deep Work'
+    ],
+    insights: [
+      {
+        title: 'Systems Over Goals',
+        content: 'Goals are for direction. Systems are for progress. I don\'t aim to "make a great course" — I aim to spend 4 focused hours daily on content.',
+        engagement: '5.1K'
+      },
+      {
+        title: 'The 2-Minute Rule',
+        content: 'If something takes less than 2 minutes, do it now. Tiny completions build momentum for bigger tasks.',
+        engagement: '3.9K'
+      },
+      {
+        title: 'Protect Your Morning',
+        content: 'No meetings before 11am. The morning is for deep work. Everything else can wait.',
+        engagement: '4.5K'
+      }
+    ]
+  },
+  {
+    id: 'spirituality',
+    name: 'Spirituality',
+    color: '#a78bfa',
+    description: 'Not religion — the deeper questions about purpose, meaning, and what actually matters when the noise stops. The practices that keep me grounded and the frameworks for finding peace in chaos.',
+    topics: [
+      'Mindfulness',
+      'Inner Peace',
+      'Purpose Finding',
+      'Gratitude',
+      'Acceptance',
+      'Present Moment',
+      'Letting Go',
+      'Self-Reflection'
+    ],
+    insights: [
+      {
+        title: 'The Enough Question',
+        content: 'How much is enough? Most people never ask. They keep chasing without knowing what finish line they\'re running toward.',
+        engagement: '4.8K'
+      },
+      {
+        title: 'Detachment from Outcomes',
+        content: 'Do your best work, then release attachment to results. You control effort, not outcomes. Peace comes from accepting this.',
+        engagement: '3.2K'
+      },
+      {
+        title: 'Daily Silence',
+        content: '10 minutes of doing nothing. No phone, no music, no meditation app. Just sitting with your thoughts. It\'s harder than any workout.',
+        engagement: '2.9K'
+      }
+    ]
+  },
+  {
+    id: 'cultures',
+    name: 'Global Cultures',
+    color: '#fbbf24',
+    description: 'Living in India and Germany, working with people from 50+ countries — culture shapes everything from how you negotiate to how you say no. The patterns I\'ve noticed and the lessons that only come from being the outsider.',
+    topics: [
+      'Cross-Cultural Work',
+      'Communication Styles',
+      'Global Perspectives',
+      'Diversity',
+      'Adapting Abroad',
+      'Cultural Intelligence',
+      'Breaking Stereotypes',
+      'Learning from Others'
+    ],
+    insights: [
+      {
+        title: 'Direct vs Indirect',
+        content: 'Germans say "this won\'t work." Indians say "let me check and get back." Neither is wrong — they\'re different operating systems.',
+        engagement: '6.2K'
+      },
+      {
+        title: 'The Outsider Advantage',
+        content: 'Being foreign forces you to question assumptions locals never examine. Use this superpower before you assimilate.',
+        engagement: '3.8K'
+      },
+      {
+        title: 'Hierarchy Expectations',
+        content: 'In some cultures, junior employees don\'t speak in meetings. In others, silence means you have nothing to contribute. Know which room you\'re in.',
+        engagement: '4.1K'
+      }
+    ]
   }
 ];
 
